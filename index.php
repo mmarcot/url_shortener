@@ -12,15 +12,17 @@ enteteHTML("Raccourcisseur d'URL");
     <td><input type="text" name="url_orig" value="<?php if(isset($_SESSION['url_orig'])) { echo $_SESSION['url_orig']; } ?>"></td>
   </tr>
   </table>
-  <?php
-  if(!empty($_SESSION['erreur'])){
-    echo "<br>";
-    echo "<div style='color:red; border:1px solid red; width:400px; margin:auto; text-align:center;'>";
-    echo $_SESSION['erreur'];  
-    echo "</div>";
-    $_SESSION['erreur'] = "";
-  }
-  ?>
+
+<?php
+if(!empty($_SESSION['erreur'])){
+  echo "<br>";
+  echo "<div style='color:red; border:1px solid red; width:400px; margin:auto; text-align:center;'>";
+  echo $_SESSION['erreur'];  
+  echo "</div>";
+  $_SESSION['erreur'] = "";
+}
+?>
+
   <p style="text-align:center;">
     <input type="submit" value="Générer &rarr;">
   </p>
