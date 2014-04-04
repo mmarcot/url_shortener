@@ -2,11 +2,9 @@
 include("tools.php");
 //include("config.php");
 
-enteteHTML("racourci");
-enteteTitreHTML("racourci");
-?>
+enteteHTML("Raccourcis");
+echo "<h2 style='text-align:center'>Raccourcis</h2>";
 
-<?php
 $_SESSION['erreur'] = "";
 
 echo $_POST['url_orig'];
@@ -16,9 +14,5 @@ if(empty($_POST['url_orig'])) {
   header("Location: index.php");
 }
 
-?>
-
-
-<?php 
 finHTML();
 ?>
