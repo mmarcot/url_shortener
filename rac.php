@@ -7,35 +7,18 @@ enteteTitreHTML("racourci");
 ?>
 
 <?php
+$_SESSION['erreur'] = "";
 
-$url = $_POST['url'];
+echo $_POST['url_orig'];
 
-echo $url;
-
-if(isset($url)){
-	if(!empty($url)){
-		$_SESSION['url'] = 'Champ url vide';
-	}
-	else {
-	
-		if(empty($url)) {
-			$_SESSION['url'] = 'Champ url vide';
-		}
-		header("Location: index.php?url=$url");
-	}
+if(empty($_POST['url_orig'])) {
+  $_SESSION['erreur'] .= "Champs URL vide";
+  header("Location: index.php");
 }
-else {
-	header("Location: index.php?url=$url");
-}
-
-
-
-
 
 ?>
 
 
 <?php 
-//session_destroy();
 finHTML();
 ?>
