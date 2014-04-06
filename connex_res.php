@@ -2,7 +2,6 @@
 include_once("tools.php");
 include_once("config.php");
 
-//TODO verifier la compatibilité avec la nouvelle BDD
 
 if( isset($_POST['pseudo_c']) && isset($_POST['pass_c']) ) {
 
@@ -18,9 +17,9 @@ if( isset($_POST['pseudo_c']) && isset($_POST['pass_c']) ) {
   $trouve = false;
   foreach( $req as $ligne ) {
     if( $ligne->mdp == crypt($_POST['pass_c'], 'rl') ) {
-      $_SESSION['droit_acces'] = "true";
+      $_SESSION['connex_active'] = "$_POST[pseudo_c]";
       $trouve = true;
-      header("Location: film.php"); //TODO changer la redirection
+      header("Location: index.php");
     }
   }
   if(!$trouve) {
