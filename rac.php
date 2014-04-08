@@ -22,12 +22,17 @@ if(empty($_POST['url_orig'])) {
   </table>
 </form>
 <br>
-<table style='margin:auto; background:#EEEEEE; padding:8px'>
-<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>
-<tr><td><a style='text-align:center;' href='connexion.php'>Me connecter</a></td></tr>
-<tr><td><a style='text-align:center;' href='inscription.php'>M'inscrire</a></td></tr>
-</table>
-
 <?php
+echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
+echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
+if( !empty($_SESSION['connex_active'])) {
+  echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
+}
+else {
+  echo "<tr><td><a style='text-align:center;' href='connexion.php'>Me connecter</a></td></tr>";
+}
+echo "<tr><td><a style='text-align:center;' href='inscription.php'>M'inscrire</a></td></tr>";
+echo "</table>";
+
 finHTML();
 ?>

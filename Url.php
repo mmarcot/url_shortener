@@ -1,7 +1,7 @@
 <?php
 class Url  {
   /**
-   * Methode qui permet de verifier si un URL entre
+   * Methode qui permet de verifier si un URL entré
    * est valide ou non
    */
   public static function verifier($url) {
