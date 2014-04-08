@@ -30,8 +30,8 @@ if( !empty($_SESSION['connex_active'])) {
 }
 else {
   echo "<tr><td><a style='text-align:center;' href='connexion.php'>Me connecter</a></td></tr>";
+  echo "<tr><td><a style='text-align:center;' href='inscription.php'>M'inscrire</a></td></tr>";
 }
-echo "<tr><td><a style='text-align:center;' href='inscription.php'>M'inscrire</a></td></tr>";
 echo "</table>";
 
 finHTML();
