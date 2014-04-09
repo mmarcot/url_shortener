@@ -1,4 +1,8 @@
 <?php
+include_once("tools.php");
+include_once("config.php");
+
+
 class Url  {
   /**
    * Methode qui permet de verifier si un URL entré
@@ -6,14 +10,12 @@ class Url  {
    */
   public static function verifier($url) {
     $etatSyn = true;
-    $etatEx = true;
     $etatCib = true;
     
     $etatSyn = verifierSynthaxe($url);
-    $etatEx = verifierExisteDeja($url);
     $etatCib = verifierCible($url);
 
-    if( $etatSyn && $etatEx && $etatCib )
+    if( $etatSyn && $etatCib && !verifierExisteDejaOrig($url) )
       return true;
     else 
       return false;
@@ -33,12 +35,40 @@ class Url  {
 
 
   /**
-   * Methode qui verifie si l'url existe deja dans la BDD
+   * Methode qui verifie si l'url courte existe deja dans la BDD
    */
-  public static function verifierExisteDeja($url) {
-    $etat = true;
+  public static function verifierExisteDejaCourt($url_court) {
+    $ex_deja = false;
     
-    /* TODO verif ici */
+    $req = $pdo->prepare("SELECT courte FROM urls WHERE courte=:uc;");
+    $req->bindParam(":uc", $url_court);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    foreach( $req as $ligne ) {
+      // si la requete remonte 1 ligne ou plus
+      // on met c'est que ca existe déja dans la base :
+      $ex_deja = true;
+    } 
+
+    return $etat;
+  }
+
+
+  /**
+   * Methode qui verifie si l'url original existe deja dans la BDD
+   */
+  public static function verifierExisteDejaOrig($url_orig) {
+    $ex_deja = false;
+    
+    $req = $pdo->prepare("SELECT source FROM urls WHERE source=:sou;");
+    $req->bindParam(":sou", $url_orig);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    foreach( $req as $ligne ) {
+      // si la requete remonte 1 ligne ou plus
+      // on met c'est que ca existe déja dans la base :
+      $ex_deja = true;
+    } 
 
     return $etat;
   }
@@ -63,6 +93,14 @@ class Url  {
    * l'url original
    */
   public static function genererUrlCourt($url_orig) {
+    /* TODO completer */
+  }
+
+
+  /**
+   * Methode qui permet d'ajouter un url dans la BDD
+   */
+  public static function ajouterUrl($url_orgi, $url_court, $author) {
     /* TODO completer */
   }
 
