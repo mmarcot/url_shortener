@@ -57,9 +57,9 @@ else {
 
 	// requete pour compter le nombre d'enregistrement dans la table
 	
-	$stmt = $pdo->prepare("SELECT * FROM membres");
-	$stmt->execute();
-	$nb_res = $stmt->rowCount();
+	$req_cmpt = $pdo->prepare("SELECT * FROM membres");
+	$req_cmpt->execute();
+	$nb_res = $req_cmpt->rowCount();
 	//echo $nb_res;
 
 	$admin = 'administrateur';

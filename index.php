@@ -1,7 +1,28 @@
 <?php
 include("tools.php");
-
+include("config.php");
 enteteHTML("Raccourcisseur d'URL");
+?>
+
+<?php
+
+	if(!empty($_SESSION['connex_active'])) {
+	
+		$stmt =$pdo->prepare("SELECT profil FROM membres where nom=:i");
+		$stmt->setFetchMode(PDO::FETCH_OBJ);
+		$stmt->bindParam(':i', $p);
+		$p = $_SESSION['connex_active'];
+		$stmt->execute();
+		
+		foreach($stmt as $val) {
+		$p=$val->profil;
+		}
+	
+		$nom = $_SESSION['connex_active'];
+		
+		echo "<p style='text-align:center;' >".$nom." est connecté "."(".$p.")"."</p>";
+	}
+
 ?>
 
 <h2 style='text-align:center;'>Réduction d'URL</h2>
