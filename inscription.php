@@ -33,6 +33,7 @@ enteteHTML("Formulaire d'inscription");
   </p>
 </form>
 
+
 <?php
 if(!empty($_SESSION['info'])) {
   echo "<div style='color:green; border:1px solid green; width:400px; margin:auto;'>";
