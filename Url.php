@@ -28,7 +28,10 @@ class Url  {
   public static function verifierSynthaxe($url) {
     $etat = true;
     
-    /* TODO verif ici */
+    // si il y a un espace dans l'url :
+    if( strpos($url, ' ') {
+      $etat = false;
+    } 
 
     return $etat;
   }
@@ -81,7 +84,9 @@ class Url  {
   public static function verifierCible($url) {
     $etat = true;
     
-    /* TODO verif ici */
+    if( strpos($url, $_SERVER['PHP_SELF'])) {
+      $etat = false;
+    } 
 
     return $etat;
   }
