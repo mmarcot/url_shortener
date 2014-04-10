@@ -29,7 +29,7 @@ class Url  {
     $etat = true;
     
     // si il y a un espace dans l'url :
-    if( strpos($url, ' ') {
+    if( strpos($url, ' ')) {
       $etat = false;
     } 
 
@@ -115,7 +115,20 @@ class Url  {
    * passé en parametre
    */
   public static function getUrlByAuthor($author) {
-    /* TODO completer */
+  
+	global $pdo;
+	
+   	if(!empty($_SESSION['connex_active'])) {
+		$req_lien =$pdo->prepare("SELECT * FROM urls");
+
+		$req_lien->execute();
+		
+		$resultat = $req_lien->fetchAll();
+		
+		
+		return $resultat;
+
+	}
   }
 
 }

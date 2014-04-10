@@ -1,4 +1,21 @@
 <?php
+include_once("tools.php");
+include_once("config.php");
+include_once("Url.php");
+enteteHTML("Lien URL");
+?>
+
+<?php
+
+	$tab=Url::getUrlByAuthor(7);
+	
+	// afficher le tableau
+	
+	print_r($tab);
+
+?>
+
+<?php
 echo "<h2 style='text-align:center'>Mes liens</h2>";
 
 echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
