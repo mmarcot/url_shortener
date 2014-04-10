@@ -3,6 +3,10 @@ include_once("Membre.php");
 
 // on verifie si c'est un admin avant de faire quoi que ce soit :
 if( Membre::estAdmin($_SESSION['connex_active']) ) {
+  $tab_membres = Membre::getAll();
+
+  //TODO construire le tableau affichant tous les membres 
+
   echo "<h2 style='text-align:center'>Administration</h2>";
 
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";

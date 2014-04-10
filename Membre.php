@@ -28,6 +28,20 @@ class Membre {
     return $etat;
   }
 
+
+  /**
+   * Methode qui renvoie l'ensemble des membres sous forme de
+   * tableau associatif
+   */
+  public static function getAll() {
+    global $pdo;
+
+    $req = $pdo->prepare("SELECT * from membres");
+    $req->execute();
+
+    return ($req->fetchAll());
+  }
+
 }
 
 ?>
