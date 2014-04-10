@@ -3,6 +3,10 @@ include_once("tools.php");
 include_once("config.php");
 
 
+/**
+ * Classe qui regroupe un ensemble de methodes statiques
+ * pour la gestion des urls 
+ */
 class Url  {
   /**
    * Methode qui permet de verifier si un URL entré
@@ -29,7 +33,7 @@ class Url  {
     $etat = true;
     
     // si il y a un espace dans l'url :
-    if( strpos($url, ' ') {
+    if( strpos($url, ' ')) {
       $etat = false;
     } 
 
@@ -41,6 +45,8 @@ class Url  {
    * Methode qui verifie si l'url courte existe deja dans la BDD
    */
   public static function verifierExisteDejaCourt($url_court) {
+    global $pdo;
+
     $ex_deja = false;
     
     $req = $pdo->prepare("SELECT courte FROM urls WHERE courte=:uc;");
@@ -61,6 +67,8 @@ class Url  {
    * Methode qui verifie si l'url original existe deja dans la BDD
    */
   public static function verifierExisteDejaOrig($url_orig) {
+    global $pdo;
+
     $ex_deja = false;
     
     $req = $pdo->prepare("SELECT source FROM urls WHERE source=:sou;");
