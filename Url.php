@@ -131,13 +131,18 @@ class Url  {
 
 		$req_lien->execute();
 		
+		$req_lien->setFetchMode(PDO::FETCH_OBJ);
+		
 		$resultat = $req_lien->fetchAll();
+		
 		
 		
 		return $resultat;
 
 	}
   }
+  
+  
 
 }
 ?>
