@@ -5,6 +5,27 @@ include_once("Membre.php");
 
 
 /**
+ * Methode qui insere dans le code HTML une fonction javaScript
+ * permettant d'afficher/cacher une zone
+ */
+function inclureFonctionToggleDisplay() {
+  echo <<<JS
+  <script>
+    function toggleDisplay(elmt) {
+       if(typeof elmt == "string")
+          elmt = document.getElementById(elmt);
+       if(elmt.style.display == "none")
+          elmt.style.display = "";
+       else
+          elmt.style.display = "none";
+    }
+  </script>
+JS;
+}
+
+
+
+/**
  * fonction qui affiche la barre de connexion en haut
  */
 function barreConnexion($pseudo) {

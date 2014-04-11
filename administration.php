@@ -9,20 +9,26 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   if(!empty($_SESSION['connex_active']))
     barreConnexion($_SESSION['connex_active']);
 
+  // on inclut la fonction JS toggledisplay() :
+  inclureFonctionToggleDisplay();
+
   echo "<h2 style='text-align:center'>Administration</h2>";
 
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
+
+  echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_m')\">Liste membres</a></td></tr>";
+  echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_l')\">Liste liens</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='mon_compte.php'>Mon compte</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
   echo "</table>";
 
-  //TODO afficher/masquer les tableaux en javascript
+
   //TODO modif/suppr de liens/membres
 
   // ######### affichage du tableau des membres #########
   $tab_membres = Membre::getAll();
-  echo "<table border='1' style='margin: auto;'>
+  echo "<table border='1' style='margin: auto; display:none;' id='tab_m'>
         <tr>
           <td>ID</td>
           <td>Pseudo</td>
@@ -47,7 +53,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 
   // ######### affichage du tableau des liens #########
   $tab_liens = Url::getAll();
-  echo "<table border='1' style='margin: auto;'>
+  echo "<table border='1' style='margin: auto; display:none;' id='tab_l'>
         <tr>
           <td>ID</td>
           <td>URL cible</td>
