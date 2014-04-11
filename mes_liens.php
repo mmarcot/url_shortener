@@ -6,6 +6,10 @@ enteteHTML("Mes liens");
 
 
 if(!empty($_SESSION['connex_active'])) {
+
+  if(!empty($_SESSION['connex_active']))
+    barreConnexion($_SESSION['connex_active']);
+
   echo "<h2 style='text-align:center'>Mes liens</h2>";
 
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";

@@ -1,7 +1,12 @@
 <?php
 include_once("Membre.php");
+enteteHTML("Mon compte");
 
 if( !empty($_SESSION['connex_active']) ) {
+
+  if(!empty($_SESSION['connex_active']))
+    barreConnexion($_SESSION['connex_active']);
+
   echo "<h2 style='text-align:center'>Mon compte</h2>";
 
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
@@ -16,4 +21,6 @@ if( !empty($_SESSION['connex_active']) ) {
 else {
   header("Location: index.php");
 }
+
+finHTML();
 ?>

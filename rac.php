@@ -1,6 +1,6 @@
 <?php
-include("tools.php");
-//include("config.php");
+include_once("tools.php");
+include_once("config.php");
 
 enteteHTML("Votre URL raccourcis !");
 
@@ -10,6 +10,9 @@ if(empty($_POST['url_orig'])) {
   $_SESSION['erreur'] .= "Veuillez entrer un URL";
   header("Location: index.php");
 }
+
+if(!empty($_SESSION['connex_active']))
+  barreConnexion($_SESSION['connex_active']);
 ?>
 
 <h2 style='text-align:center;'>Réduction d'URL</h2>
@@ -22,6 +25,7 @@ if(empty($_POST['url_orig'])) {
   </table>
 </form>
 <br>
+
 <?php
 echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
 echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
@@ -36,3 +40,8 @@ echo "</table>";
 
 finHTML();
 ?>
+
+
+
+
+

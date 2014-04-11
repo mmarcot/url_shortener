@@ -8,12 +8,14 @@ include_once("Membre.php");
  * fonction qui affiche la barre de connexion en haut
  */
 function barreConnexion($pseudo) {
+  echo "<div style=' margin:0; border-bottom:1px solid black; background:#f5f5f5;'>";
   if( Membre::estAdmin($pseudo) ) {
-    echo "<p style='text-align:center;' >" . $pseudo . " est connecté (admin)</p>";
+    echo "<p style='text-align:center; margin:0;' >" . $pseudo . " est connecté (admin)</p>";
   }
   else {
     echo "<p style='text-align:center;' >" . $pseudo . " est connecté (membre)</p>";
   }
+  echo "</div>";
 }
 
 
@@ -32,7 +34,7 @@ function enteteHTML($titre)
       $titre
     </title>
   </head>
-  <body>
+  <body style='margin:0;'>
 YOP;
 }
 
