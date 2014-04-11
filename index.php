@@ -1,29 +1,13 @@
 <?php
-include("tools.php");
-include("config.php");
+include_once("tools.php");
+include_once("config.php");
+include_once("Membre.php");
 enteteHTML("Raccourcisseur d'URL");
-?>
 
-<?php
 
-	// todo a modifier
-
-	if(!empty($_SESSION['connex_active'])) {
-	
-		$req_profil =$pdo->prepare("SELECT profil FROM membres where nom=:i");
-		$req_profil->setFetchMode(PDO::FETCH_OBJ);
-		$req_profil->bindParam(':i', $profil);
-		$profil = $_SESSION['connex_active'];
-		$req_profil->execute();
-		
-		foreach($req_profil as $val) {
-		$profil=$val->profil;
-		}
-	
-		$nom = $_SESSION['connex_active'];
-		
-		echo "<p style='text-align:center;' >".$nom." est connecté "."(".$profil.")"."</p>";
-	}
+if(!empty($_SESSION['connex_active'])) {
+  barreConnexion($_SESSION['connex_active']);
+}
 
 ?>
 

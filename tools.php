@@ -1,6 +1,20 @@
 <?php
 
 session_start();
+include_once("Membre.php");
+
+
+/**
+ * fonction qui affiche la barre de connexion en haut
+ */
+function barreConnexion($pseudo) {
+  if( Membre::estAdmin($pseudo) ) {
+    echo "<p style='text-align:center;' >" . $pseudo . " est connecté (admin)</p>";
+  }
+  else {
+    echo "<p style='text-align:center;' >" . $pseudo . " est connecté (membre)</p>";
+  }
+}
 
 function enteteHTML($titre)
 {
