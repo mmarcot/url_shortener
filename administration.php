@@ -13,6 +13,9 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
   echo "</table>";
 
+  //TODO afficher/masquer les tableaux en javascript
+  //TODO modif/suppr de liens/membres
+
   // ######### affichage du tableau des membres #########
   $tab_membres = Membre::getAll();
   echo "<table border='1' style='margin: auto;'>
