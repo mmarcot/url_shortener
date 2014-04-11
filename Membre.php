@@ -38,6 +38,7 @@ class Membre {
 
     $req = $pdo->prepare("SELECT * from membres");
     $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
 
     return ($req->fetchAll());
   }

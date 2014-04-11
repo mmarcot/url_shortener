@@ -16,6 +16,11 @@ function barreConnexion($pseudo) {
   }
 }
 
+
+/**
+ * Fonction qui affiche l'en-tete HTML avec un titre
+ * donné
+ */
 function enteteHTML($titre)
 {
   echo <<< YOP
@@ -31,6 +36,10 @@ function enteteHTML($titre)
 YOP;
 }
 
+
+/**
+ * Fonction qui affiche un titre en HTML
+ */
 function enteteTitreHTML($titre)
 {
   enteteHTML($titre);
@@ -42,6 +51,10 @@ function enteteTitreHTML($titre)
 YOP;
 }
 
+
+/**
+ * Fonction qui affiche la fin d'un fichier HTML
+ */
 function finHTML()
 {
   echo <<< YOP

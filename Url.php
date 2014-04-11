@@ -124,19 +124,29 @@ class Url  {
    */
   public static function getUrlByAuthor($author) {
   
-	global $pdo;
-	
-   	if(!empty($_SESSION['connex_active'])) {
-		$req_lien =$pdo->prepare("SELECT * FROM urls");
+    global $pdo;
+    
+    if(!empty($_SESSION['connex_active'])) {
+      $req_lien =$pdo->prepare("SELECT * FROM urls");
+      $req_lien->execute();
+      $resultat = $req_lien->fetchAll();
+      
+      return $resultat;
+    }
+  }
 
-		$req_lien->execute();
-		
-		$resultat = $req_lien->fetchAll();
-		
-		
-		return $resultat;
+  /**
+   * Methode qui renvoie l'ensemble des liens sous forme de
+   * tableau associatif
+   */
+  public static function getAll() {
+    global $pdo;
 
-	}
+    $req = $pdo->prepare("SELECT * from urls");
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+
+    return ($req->fetchAll());
   }
 
 }
