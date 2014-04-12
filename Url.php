@@ -92,6 +92,7 @@ class Url  {
   public static function verifierCible($url) {
     $etat = true;
     
+    //TODO modifier incorrect ###########################
     if( strpos($url, $_SERVER['PHP_SELF'])) {
       $etat = false;
     } 
@@ -102,11 +103,18 @@ class Url  {
 
 
   /**
-   * Methode qui genere une url courte à partir de
-   * l'url original
+   * Methode qui genere une url courte sur 7 caractères
+   * à partir de l'url original
    */
   public static function genererUrlCourt($url_orig) {
-    /* TODO completer */
+    $carac_allowed = "AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn0123456789";
+    $nb_carac = strlen($carac_allowed);
+
+    $res = "";
+    for ($i = 0; $i < 7; $i++) {
+      $res .= $carac_allowed[rand(0,$nb_carac)]; 
+    }
+    return $res;
   }
 
 
@@ -114,6 +122,15 @@ class Url  {
    * Methode qui permet d'ajouter un url dans la BDD
    */
   public static function ajouterUrl($url_orgi, $url_court, $author) {
+    /* TODO completer */
+  }
+
+
+  /**
+   * Methode qui permet de supprimer un url dans la BDD
+   * avec son id
+   */
+  public static function supprimerUrl($id_url) {
     /* TODO completer */
   }
 

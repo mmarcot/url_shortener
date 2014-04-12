@@ -1,6 +1,7 @@
 <?php
 include_once("tools.php");
 include_once("config.php");
+include_once("Url.php");
 
 enteteHTML("Votre URL raccourcis !");
 
@@ -20,7 +21,7 @@ if(!empty($_SESSION['connex_active']))
   <table style="margin:auto; background:#EEEEEE; padding:5px;">
   <tr>
     <td>URL :</td>
-    <td><input type="text" name="url_short" value="<?php if(isset($_POST['url_orig'])) { echo $_POST['url_orig']; } ?>"></td>
+    <td><input type="text" name="url_short" value="<?php if(isset($_POST['url_orig'])) { echo Url::genererUrlCourt($_POST['url_orig']); } ?>"></td>
   </tr>
   </table>
 </form>
