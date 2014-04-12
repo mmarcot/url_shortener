@@ -122,18 +122,15 @@ class Url  {
    * Methode qui renvoie tous les url créés par l'auteur
    * passé en parametre
    */
-  public static function getUrlByAuthor($author) {
+  public static function getUrlByAuthor($id_author) {
     global $pdo;
     
     $req_lien =$pdo->prepare("SELECT * FROM urls where auteur =:auteur");
-    $req_lien->bindParam(':auteur', $aut);
-    $p = ($_SESSION['connex_active']);
-    $aut = Url::getIdFromPseudo($p);
+    $req_lien->bindParam(':auteur', $id_author);
     $req_lien->execute();
     $req_lien->setFetchMode(PDO::FETCH_OBJ);
-    $resultat = $req_lien->fetchAll();
 
-    return $resultat;
+    return ($req_lien->fetchAll());
   }
 
 
@@ -152,34 +149,7 @@ class Url  {
   }
   
 
-  /**
-	* Methode qui renvoie l'id du membre a parti de son pseudo
-	*/
   
-	public static function getIdFromPseudo($pseudo) {
-  
-		global $pdo;
-	
-		$id_res = 0;
-		
-		if(!empty($_SESSION['connex_active'])) {
-			$req_id =$pdo->prepare("SELECT DISTINCT id FROM membres WHERE pseudo=:pseudo");
-			$req_id->setFetchMode(PDO::FETCH_OBJ);
-			$req_id->bindParam(':pseudo', $pse);
-			$pse = $_SESSION['connex_active'];
-			$req_id->execute();
-
-		
-
-			foreach($req_id as $val) {
-			$id=$val->id;
-			$id_res = $id;
-		}
-		
-		return $id_res;
-
-		}
-	}
 	
 	
 }

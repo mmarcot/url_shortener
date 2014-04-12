@@ -2,6 +2,7 @@
 include_once("tools.php");
 include_once("config.php");
 include_once("Url.php");
+include_once("Membre.php");
 enteteHTML("Mes liens");
 
 
@@ -20,8 +21,7 @@ if(!empty($_SESSION['connex_active'])) {
 
   // on récupère l'ID de l'auteur pour
   // enuite ressortir ses liens :
-  $p = ($_SESSION['connex_active']);
-  $id_author = Url::getIdFromPseudo($p);
+  $id_author = Membre::getIdFromPseudo($_SESSION['connex_active']);
   $tab = Url::getUrlByAuthor($id_author);
 
   // affichage du tableau de mes liens :

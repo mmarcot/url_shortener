@@ -43,6 +43,24 @@ class Membre {
     return ($req->fetchAll());
   }
 
+
+  /**
+   * Methode qui renvoie l'id du membre a parti de son pseudo
+	 */
+	public static function getIdFromPseudo($pseudo) {
+		global $pdo;
+	
+		$id_res = 0;
+    $req_id = $pdo->prepare("SELECT id FROM membres WHERE pseudo=:pseu");
+    $req_id->bindParam(':pseu', $pseudo);
+    $req_id->execute();
+    $req_id->setFetchMode(PDO::FETCH_OBJ);
+
+    foreach($req_id as $val) {
+      $id_res = $val->id;
+    }
+    return $id_res;
+	}
 }
 
 ?>
