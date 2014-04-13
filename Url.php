@@ -114,7 +114,7 @@ class Url  {
 
     $res = "goo.gl/"; //TODO à modifier #####################
     for ($i = 0; $i < $nb_carac; $i++) {
-      $res .= $carac_allowed[rand(0,strlen($carac_allowed))]; 
+      $res .= $carac_allowed[rand(0,strlen($carac_allowed)-1)]; 
     }
     return $res;
   }
