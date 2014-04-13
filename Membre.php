@@ -27,6 +27,36 @@ class Membre {
 
     return $etat;
   }
+  
+  
+  /**
+   * Methode qui permet d'ajouter un membre dans la BDD
+   */
+  public static function ajouterMembre($nom, $prenom, $pseudo, $mail, $mdp, $profil) {
+    global $pdo;
+  
+    $req_ins = $pdo->prepare("INSERT INTO membres(nom, prenom, pseudo, mail, mdp, profil) VALUES(:nom, :pre, :pseu, :mail, :pwd, :prof);");
+    $req_ins->bindParam(":pseu", $pseudo);
+    $req_ins->bindParam(":pre", $prenom);
+    $req_ins->bindParam(":nom", $nom);
+    $req_ins->bindParam(":mail", $mail);
+    $req_ins->bindParam(":pwd", crypt($mdp, 'rl'));
+    $req_ins->bindParam(":prof", $profil);
+    $req_ins->execute();
+  }
+  
+  
+  /**
+   * Methode qui permet de compter le nombre de membres dans la BDD
+   */
+  public static function countAll() {
+    global $pdo;
+    
+    $req_cmpt = $pdo->prepare("SELECT * FROM membres");
+	  $req_cmpt->execute();
+    
+    return ($req_cmpt->rowCount());
+  }
 
 
   /**

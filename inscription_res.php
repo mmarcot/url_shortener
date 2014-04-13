@@ -1,6 +1,7 @@
 <?php
 include_once("tools.php");
 include_once("config.php");
+include_once("Membre.php");
 
 
 if(!isset($_POST['pseudo'])) {
@@ -53,54 +54,28 @@ else {
 
 
   if( $msg_erreur == "" ) {
-
-	  // requete pour compter le nombre d'enregistrement dans la table :
-	  $req_cmpt = $pdo->prepare("SELECT * FROM membres");
-	  $req_cmpt->execute();
-	  $nb_res = $req_cmpt->rowCount();
-
 	  $admin = 'administrateur';
 	  $membre = 'membre';
 	
-	  if($nb_res == 0) {
+	  if(Membre::countAll() == 0) {
+	  
 		  // insertion de l'admin dans la BDD :
-		  $req_ins = $pdo->prepare("INSERT INTO membres(nom, prenom, pseudo, mail, mdp, profil) VALUES(:nom, :pre, :pseu, :mail, :pwd, :prof);");
-		  $req_ins->bindParam(":pseu", $_POST['pseudo']);
-		  $req_ins->bindParam(":pre", $_POST['prenom']);
-		  $req_ins->bindParam(":nom", $_POST['nom']);
-		  $req_ins->bindParam(":mail", $_POST['mail']);
-		  $req_ins->bindParam(":pwd", crypt($_POST['pass'], 'rl'));
-		  $req_ins->bindParam(":prof", $admin);
-		  $req_ins->execute();
+		  Membre::ajouterMembre($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['mail'], $_POST['pass'], $admin);
 		  
 		  // insertion de l'anonyme dans la BDD :
-		  $pseudonyme = "anonyme";
-		  $req_ins = $pdo->prepare("INSERT INTO membres(nom, prenom, pseudo, mail, mdp, profil) VALUES(:nom, :pre, :pseu, :mail, :pwd, :prof);");
-		  $req_ins->bindParam(":pseu", $pseudonyme);
-		  $req_ins->bindParam(":pre", $pseudonyme);
-		  $req_ins->bindParam(":nom", $pseudonyme);
-		  $req_ins->bindParam(":mail", $pseudonyme);
-		  $req_ins->bindParam(":pwd", crypt($pseudonyme, 'rl'));
-		  $req_ins->bindParam(":prof", $membre);
-		  $req_ins->execute();
-
-		  $_SESSION['info'] = "Inscription complétée !";
-		  header("Location: inscription.php");
+		  $pseu_ano = "anonyme";
+		  Membre::ajouterMembre($pseu_ano, $pseu_ano, $pseu_ano, $pseu_ano, $pseu_ano, $membre);
+		  
 	  }
 	  else { // $nb_res > 0
-		  // insertion dans la base de donnée :
-		  $req_ins = $pdo->prepare("INSERT INTO membres(nom, prenom, pseudo, mail, mdp, profil) VALUES(:nom, :pre, :pseu, :mail, :pwd, :prof);");
-		  $req_ins->bindParam(":pseu", $_POST['pseudo']);
-		  $req_ins->bindParam(":pre", $_POST['prenom']);
-		  $req_ins->bindParam(":nom", $_POST['nom']);
-		  $req_ins->bindParam(":mail", $_POST['mail']);
-		  $req_ins->bindParam(":pwd", crypt($_POST['pass'], 'rl'));
-		  $req_ins->bindParam(":prof", $membre);
-		  $req_ins->execute();
-
-		  $_SESSION['info'] = "Inscription complétée !";
-		  header("Location: inscription.php");
+	  
+		  // insertion d'un profil membre dans la BDD :
+		  Membre::ajouterMembre($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['mail'], $_POST['pass'], $membre);
 	  }
+	  
+	  $_SESSION['info'] = "Inscription complétée !";
+		header("Location: inscription.php");
+		
   }
   else { // si il y a une erreur dans la saisie du formulaire
     $_SESSION['erreur'] = $msg_erreur;
