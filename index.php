@@ -5,10 +5,10 @@ include_once("Membre.php");
 enteteHTML("Raccourcisseur d'URL");
 
 
+// affichage de la barre de connexion supérieure :
 if(!empty($_SESSION['connex_active'])) {
   barreConnexion($_SESSION['connex_active']);
 }
-
 ?>
 
 <h2 style='text-align:center;'>Réduction d'URL</h2>
@@ -20,7 +20,7 @@ if(!empty($_SESSION['connex_active'])) {
   </tr>
   </table>
 
-<?php
+<?php // Affichage des erreurs éventuelles :
 if(!empty($_SESSION['erreur'])){
   echo "<br>";
   echo "<div style='color:red; border:1px solid red; width:400px; margin:auto; text-align:center;'>";
@@ -28,14 +28,17 @@ if(!empty($_SESSION['erreur'])){
   echo "</div>";
   $_SESSION['erreur'] = "";
 }
-?>
 
-  <p style="text-align:center;">
-    <input type="submit" value="Générer &rarr;">
-  </p>
+
+echo <<<BOUT
+<p style="text-align:center;">
+  <input type="submit" value="Générer &rarr;">
+</p>
 </form>
+BOUT;
 
-<?php
+
+// Affichage du menu :
 // si l'utilisateur est connecté :
 if( !empty($_SESSION['connex_active'] )) {
   echo <<<CONN

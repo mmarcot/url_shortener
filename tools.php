@@ -34,7 +34,7 @@ function barreConnexion($pseudo) {
     echo "<p style='text-align:center; margin:0;' >" . $pseudo . " est connecté (admin)</p>";
   }
   else {
-    echo "<p style='text-align:center;' >" . $pseudo . " est connecté (membre)</p>";
+    echo "<p style='text-align:center; margin:0;' >" . $pseudo . " est connecté (membre)</p>";
   }
   echo "</div>";
 }

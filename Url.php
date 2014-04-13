@@ -17,10 +17,11 @@ class Url  {
     $etatSyn = true;
     $etatCib = true;
     
-    $etatSyn = verifierSynthaxe($url);
-    $etatCib = verifierCible($url);
-
-    if( $etatSyn && $etatCib && !verifierExisteDejaOrig($url) )
+    $etatSyn = Url::verifierSynthaxe($url);
+    $etatCib = Url::verifierCible($url);
+    
+    //TODO si l'url existe deja retourner l'url existant ##################
+    if( $etatSyn && $etatCib && !Url::verifierExisteDejaOrig($url) )
       return true;
     else 
       return false;
@@ -58,7 +59,7 @@ class Url  {
       // si la requete remonte 1 ligne ou plus
       // on met c'est que ca existe déja dans la base :
       $ex_deja = true;
-    } 
+    }
 
     return $etat;
   }
@@ -82,7 +83,7 @@ class Url  {
       $ex_deja = true;
     } 
 
-    return $etat;
+    return $ex_deja;
   }
 
 
@@ -111,7 +112,7 @@ class Url  {
     $carac_allowed = "AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn0123456789";
     $nb_carac = 7;
 
-    $res = "";
+    $res = "goo.gl/"; //TODO à modifier #####################
     for ($i = 0; $i < $nb_carac; $i++) {
       $res .= $carac_allowed[rand(0,strlen($carac_allowed))]; 
     }
@@ -126,8 +127,6 @@ class Url  {
   public static function ajouterUrl($url_orgi, $url_court, $author) {
     global $pdo;
     
-    $etat = false;
-
     // on récupère l'id du pseudo :
     $id_aut = Membre::getIdFromPseudo($author);
     
@@ -136,12 +135,9 @@ class Url  {
       $req = $pdo->prepare("INSERT INTO urls (source, courte, auteur) VALUES (:sou, :cou, :aut);");
       $req->bindParam(':sou', $url_orgi);
       $req->bindParam(':cou', $url_court);
-      $req->bindParam(':aut', $author);
+      $req->bindParam(':aut', $id_aut, PDO::PARAM_INT);
       $req->execute();
-
-      $etat = true;
     }
-    return $etat;
   }
 
 
