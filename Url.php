@@ -146,7 +146,12 @@ class Url  {
    * avec son id
    */
   public static function supprimerUrl($id_url) {
-    /* TODO completer */
+    global $pdo;
+	
+	$req_suppr = $pdo->prepare("DELETE FROM `urls` WHERE id=:id");
+	$req_suppr->bindParam(':id', $id_url);
+	$req_suppr->execute();
+		
   }
 
 

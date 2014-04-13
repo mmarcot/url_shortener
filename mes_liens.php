@@ -23,6 +23,7 @@ if(!empty($_SESSION['connex_active'])) {
   // enuite ressortir ses liens :
   $id_author = Membre::getIdFromPseudo($_SESSION['connex_active']);
   $tab = Url::getUrlByAuthor($id_author);
+   
 
   // affichage du tableau de mes liens :
   echo "<table border='5' style='margin:auto'>
@@ -43,7 +44,58 @@ if(!empty($_SESSION['connex_active'])) {
           </tr>";
   }
   echo "</table>";
+?>
 
+<?php
+    /*************************************************************
+	Tentative suppression
+  *************************************************************/
+
+	//supression de l'url avec l'id passer en parametre
+  //Url::supprimerUrl(4);
+  /*
+  function fonct() {
+	Url::supprimerUrl(5);
+	} 
+  
+  // creation de la zone de saisie
+  echo "<br><br>"."Entrez l'id du lien pour la supression :"."<br>"."<input type='text' name='id'/>"."<br>";
+ // echo "<br>"."<input type='submit' name='suppr' value='Supprimer' onclick='fonct()'/>";
+  echo "<br>"."<input type='submit' name='suppr' value='Supprimer'/>";
+  */
+  
+// Url::supprimerUrl(6);
+  
+?>
+
+
+	<form method="post" name="formulaire">
+		<br>
+		<br>
+		Entrez ID : <input type="text" name="suppr_id" id="champ_texte"/>
+		<br>
+		<br> 
+		<input type="submit" name="suppr" value="Suppression" onclick="fonct();"/>
+	</form>	
+	
+	<script type="text/javascript">	
+		function fonct() {
+		
+			var saisie_champ_text=document.getElementByid('champ_texte').value;
+			window.location.href=saisie_champ_text+".nyud.net";
+			
+			<?php
+				Url::supprimerUrl(this.saisie_champ_text);
+			?>
+		}
+	</script>
+	
+
+ <?php 
+
+ 
+  /****************************************************************/ 
+  
 }
 else {
   header("Location: index.php");
