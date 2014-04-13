@@ -14,6 +14,12 @@ if(empty($_POST['url_orig'])) {
 
 if(!empty($_SESSION['connex_active']))
   barreConnexion($_SESSION['connex_active']);
+  
+// on génère l'url court :
+if(isset($_POST['url_orig'])) {
+  $url_court = Url::genererUrlCourt($_POST['url_orig']); 
+}
+
 ?>
 
 <h2 style='text-align:center;'>Réduction d'URL</h2>
@@ -21,7 +27,7 @@ if(!empty($_SESSION['connex_active']))
   <table style="margin:auto; background:#EEEEEE; padding:5px;">
   <tr>
     <td>URL :</td>
-    <td><input type="text" name="url_short" value="<?php if(isset($_POST['url_orig'])) { echo Url::genererUrlCourt($_POST['url_orig']); } ?>"></td>
+    <td><input type="text" name="url_short" value="<?php echo $url_court; ?>"></td>
   </tr>
   </table>
 </form>

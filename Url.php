@@ -1,6 +1,7 @@
 <?php
 include_once("tools.php");
 include_once("config.php");
+include_once("Membre.php");
 
 
 /**
@@ -108,11 +109,11 @@ class Url  {
    */
   public static function genererUrlCourt($url_orig) {
     $carac_allowed = "AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn0123456789";
-    $nb_carac = strlen($carac_allowed);
+    $nb_carac = 7;
 
     $res = "";
-    for ($i = 0; $i < 7; $i++) {
-      $res .= $carac_allowed[rand(0,$nb_carac)]; 
+    for ($i = 0; $i < $nb_carac; $i++) {
+      $res .= $carac_allowed[rand(0,strlen($carac_allowed))]; 
     }
     return $res;
   }
@@ -120,9 +121,27 @@ class Url  {
 
   /**
    * Methode qui permet d'ajouter un url dans la BDD
+   * Retourne true si OK false sinon
    */
   public static function ajouterUrl($url_orgi, $url_court, $author) {
-    /* TODO completer */
+    global $pdo;
+    
+    $etat = false;
+
+    // on récupère l'id du pseudo :
+    $id_aut = Membre::getIdFromPseudo($author);
+    
+    // si la recupération s'est bien passée, alors on insere dans la bdd :
+    if( $id_aut != -1 ) {
+      $req = $pdo->prepare("INSERT INTO urls (source, courte, auteur) VALUES (:sou, :cou, :aut);");
+      $req->bindParam(':sou', $url_orgi);
+      $req->bindParam(':cou', $url_court);
+      $req->bindParam(':aut', $author);
+      $req->execute();
+
+      $etat = true;
+    }
+    return $etat;
   }
 
 

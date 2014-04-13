@@ -45,12 +45,13 @@ class Membre {
 
 
   /**
-   * Methode qui renvoie l'id du membre a parti de son pseudo
+   * Methode qui renvoie l'id du membre a partir de son pseudo
+   * ou -1 si le pseudo n'a pas été trouvé
 	 */
 	public static function getIdFromPseudo($pseudo) {
 		global $pdo;
 	
-		$id_res = 0;
+		$id_res = -1;
     $req_id = $pdo->prepare("SELECT id FROM membres WHERE pseudo=:pseu");
     $req_id->bindParam(':pseu', $pseudo);
     $req_id->execute();
