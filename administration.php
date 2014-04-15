@@ -53,15 +53,17 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 
   // ######### affichage du tableau des liens #########
   $tab_liens = Url::getAll();
-  echo "<table border='1' style='margin: auto; display:none;' id='tab_l'>
+  echo "<div style='display:none;' id='tab_l'>"; 
+  echo "<table border='1' style='margin: auto;'>
         <tr>
           <td>ID</td>
           <td>URL cible</td>
           <td>URL courte</td>
           <td>Créée le</td>
           <td>Auteur</td>
+          <td>Suppr</td>
         </tr>";
-
+  echo "<form name='suppr_liens' action='suppr_lien.php' method='POST'>";
   foreach( $tab_liens as $ligne) {
     echo "<tr>
             <td>$ligne->id</td>
@@ -69,10 +71,13 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->courte</td>
             <td>$ligne->creation</td>
             <td>";
-    echo Membre::getPseudoFromId($ligne->auteur);
-    echo "</td></tr>";
+    echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
+    echo "<td><input type='checkbox' name='$ligne->id' value='suppr' style='margin:auto; display:block;'></td>";
+    echo "</tr>";
   }
   echo "</table>";
+  echo "<input style='display:block; margin:auto;' type='submit' value='Supprimer'>";
+  echo "</form></div>";
 }
 else {
   header("Location: index.php");
