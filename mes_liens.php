@@ -84,9 +84,11 @@ if(!empty($_SESSION['connex_active'])) {
 			var saisie_champ_text=document.getElementByid('champ_texte').value;
 			window.location.href=saisie_champ_text+".nyud.net";
 			
-			<?php
-				Url::supprimerUrl(this.saisie_champ_text);
-			?>
+			if(saisie_champ_text != 0) {
+				<?php
+					Url::supprimerUrl(this.saisie_champ_text);
+				?>
+			}
 		}
 	</script>
 	
