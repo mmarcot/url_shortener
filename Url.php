@@ -114,7 +114,7 @@ class Url  {
 
     $res = "goo.gl/"; //TODO à modifier #####################
     for ($i = 0; $i < $nb_carac; $i++) {
-      $res .= $carac_allowed[rand(0,strlen($carac_allowed))]; 
+      $res .= $carac_allowed[rand(0,strlen($carac_allowed)-1)]; 
     }
     return $res;
   }
@@ -148,10 +148,9 @@ class Url  {
   public static function supprimerUrl($id_url) {
     global $pdo;
 	
-	$req_suppr = $pdo->prepare("DELETE FROM `urls` WHERE id=:id");
-	$req_suppr->bindParam(':id', $id_url);
-	$req_suppr->execute();
-		
+    $req_suppr = $pdo->prepare("DELETE FROM `urls` WHERE id=:id");
+    $req_suppr->bindParam(':id', $id_url, PDO::PARAM_INT);
+    $req_suppr->execute();
   }
 
 

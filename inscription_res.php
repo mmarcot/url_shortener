@@ -62,9 +62,9 @@ else {
 		  // insertion de l'admin dans la BDD :
 		  Membre::ajouterMembre($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['mail'], $_POST['pass'], $admin);
 		  
-		  // insertion de l'anonyme dans la BDD :
+		  // insertion de l'anonyme dans la BDD (avec le même mdp que l'admin):
 		  $pseu_ano = "anonyme";
-		  Membre::ajouterMembre($pseu_ano, $pseu_ano, $pseu_ano, $pseu_ano, $pseu_ano, $membre);
+		  Membre::ajouterMembre($pseu_ano, $pseu_ano, $pseu_ano, $pseu_ano, $_POST['pass'], $membre);
 		  
 	  }
 	  else { // $nb_res > 0

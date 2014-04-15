@@ -92,6 +92,40 @@ class Membre {
     }
     return $id_res;
 	}
+  
+  
+  /**
+   * Methode qui permet de recupérer le pseudo à partir
+   * d'un id
+   */
+  public static function getPseudoFromId($id) {
+    global $pdo;
+    
+    $pseudo = "";
+    $req = $pdo->prepare("SELECT pseudo FROM membres WHERE id=:eid");
+    $req->bindParam(':eid', $id, PDO::PARAM_INT);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    
+    foreach($req as $ligne) {
+      $pseudo = $ligne->pseudo;
+    }
+    return $pseudo;
+  }
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

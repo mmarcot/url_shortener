@@ -33,17 +33,22 @@ if(!empty($_SESSION['connex_active'])) {
       <th>courte</th>
       <th>creation</th>
       <th>auteur</th>
+      <th>suppr</th>
     </tr>";
-  foreach($tab as $res) {
-    echo "<tr align=\"center\">
-            <td>{$res->id}</td>
-            <td>{$res->source}</td>
-            <td>{$res->courte}</td>
-            <td>{$res->creation}</td>
-            <td>{$res->auteur}</td>
-          </tr>";
+  echo "<form name='suppr_liens' action='suppr_lien.php' method='POST'>";
+  foreach( $tab as $res) {
+    echo "<tr>
+            <td>$res->id</td>
+            <td>$res->source</td>
+            <td>$res->courte</td>
+            <td>$res->creation</td>
+            <td>";
+    echo Membre::getPseudoFromId($res->auteur);
+    echo "</td>";
+    echo "<td><input type='checkbox' name='$res->id' value='suppr' style='margin:auto; display:block;'></td>";
+    echo "</tr>";
   }
-  echo "</table>";
+  echo "</form></table>";
 ?>
 
 <?php

@@ -52,7 +52,6 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 
 
   // ######### affichage du tableau des liens #########
-  //TODO afficher le pseudo de l'auteur
   $tab_liens = Url::getAll();
   echo "<table border='1' style='margin: auto; display:none;' id='tab_l'>
         <tr>
@@ -69,8 +68,9 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->source</td>
             <td>$ligne->courte</td>
             <td>$ligne->creation</td>
-            <td>$ligne->auteur</td>
-          </tr>";
+            <td>";
+    echo Membre::getPseudoFromId($ligne->auteur);
+    echo "</td></tr>";
   }
   echo "</table>";
 }
