@@ -24,7 +24,6 @@ if(!empty($_SESSION['connex_active'])) {
   $id_author = Membre::getIdFromPseudo($_SESSION['connex_active']);
   $tab = Url::getUrlByAuthor($id_author);
    
-
   // affichage du tableau de mes liens :
   echo "<table border='5' style='margin:auto'>
     <tr>
@@ -48,18 +47,19 @@ if(!empty($_SESSION['connex_active'])) {
     
 	
 	//echo "<td><input type='checkbox' name='${res->id}' value='suppr' style='margin:auto; display:block;'></td>";
-	//echo "<td><a href='suppr_liens.php'> ";
-   //echo "<td>>input type'checkbox' name='resultat[]' value='$i' style='margin:auto; display:block;'/>";
+	echo "<td><a href='suppr_liens.php?id=" .$res->id . "'> supprimer </a>";
+	
+	// tentative de numerotation des checkbox
+	////////////////////////////////////////////
+	//for($i;$i<=$nombre;$i++) {
+		// echo "<td>>input type'checkbox' name='resultat[]' value='$i' style='margin:auto; display:block;'/>";
+	//}
+	
 	echo "</tr>";
   }
    echo "</table>";
   echo "<input style='display:block; margin:auto;' type='submit' value='Supprimer'>";
   echo "</form></div>";
-  
-  
-  
-	$nombre = Url::getNombreUrl($id_author);
-	echo $nombre;
 ?>
 
 	
