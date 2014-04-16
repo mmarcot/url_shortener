@@ -2,20 +2,16 @@
 include_once("tools.php");
 include_once("config.php");
 
+include_once("Url.php");
+include_once("mes_liens.php");
+
 enteteHTML("Suppr liens");
 ?>
 
 <?php
-
-
-if(!empty($_POST['id'])) {
-
-}
-else {
-  header("Location: mes_liens.php");
-}
-
-
+	
+	Url::supprimerUrl($_GET['id'])
+	
 ?>
 
 	
