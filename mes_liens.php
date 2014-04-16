@@ -35,7 +35,7 @@ if(!empty($_SESSION['connex_active'])) {
       <th>auteur</th>
       <th>suppr</th>
     </tr>";
-  echo "<form name='suppr_liens' action='suppr_liens.php' method='POST'>";
+  echo "<form name='suppr_liens' action='.php' method='POST'>";
   foreach( $tab as $res) {
     echo "<tr>
             <td>$res->id</td>
