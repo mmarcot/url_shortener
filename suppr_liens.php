@@ -10,8 +10,8 @@ enteteHTML("Suppr liens");
 
 <?php
 	
-	Url::supprimerUrl($_GET['id'])
-	
+	Url::supprimerUrl($_GET['id']);
+	header("Location: mes_liens.php");
 ?>
 
 	
