@@ -38,6 +38,11 @@ class Url  {
     if( strpos($url, ' ')) {
       $etat = false;
     } 
+    
+    // si il n'y a pas de point 
+    if( !strpos($url, '.')) {
+      $etat = false;
+    }
 
     return $etat;
   }
