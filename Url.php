@@ -184,8 +184,21 @@ class Url  {
     return ($req->fetchAll());
   }
   
-
   
+  /**
+	* Methiode qui compte le nombre de lien racourci
+	* 	present dans la table utilisateur
+	*/
+	public static function getNombreUrl($id_author) {
+		global $pdo;
+	
+		$req_compt = $pdo->prepare("SELECT * FROM urls where auteur=:auteur");
+		$req_compt->bindParam(':auteur', $id_author);
+		$req_compt->execute();
+		$req_compt->setFetchMode(PDO::FETCH_OBJ);
+		
+		return ($req_compt->rowcount());
+	}  
 	
 	
 }
