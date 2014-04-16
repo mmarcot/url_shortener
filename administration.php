@@ -72,7 +72,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->creation</td>
             <td>";
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
-    echo "<td><input type='checkbox' name='$ligne->id' value='suppr' style='margin:auto; display:block;'></td>";
+    //echo "<td><input type='checkbox' name='${res->id}' value='suppr' style='margin:auto; display:block;'></td>";
+	echo "<td><a href='suppr_liens.php?id=" .$res->id . "'> supprimer </a>";
     echo "</tr>";
   }
   echo "</table>";
