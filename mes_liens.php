@@ -45,12 +45,21 @@ if(!empty($_SESSION['connex_active'])) {
             <td>";
     echo Membre::getPseudoFromId($res->auteur);
     echo "</td>";
-    echo "<td><input type='checkbox' name='$res->id' value='suppr' style='margin:auto; display:block;'></td>";
-    echo "</tr>";
+    
+	
+	//echo "<td><input type='checkbox' name='${res->id}' value='suppr' style='margin:auto; display:block;'></td>";
+	//echo "<td><a href='suppr_liens.php'> ";
+   //echo "<td>>input type'checkbox' name='resultat[]' value='$i' style='margin:auto; display:block;'/>";
+	echo "</tr>";
   }
    echo "</table>";
   echo "<input style='display:block; margin:auto;' type='submit' value='Supprimer'>";
   echo "</form></div>";
+  
+  
+  
+	$nombre = Url::getNombreUrl($id_author);
+	echo $nombre;
 ?>
 
 	
