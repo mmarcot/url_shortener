@@ -112,7 +112,7 @@ class Url  {
     $carac_allowed = "AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn0123456789";
     $nb_carac = 7;
 
-    $res = "goo.gl/"; //TODO à modifier #####################
+    $res = ""; 
     for ($i = 0; $i < $nb_carac; $i++) {
       $res .= $carac_allowed[rand(0,strlen($carac_allowed)-1)]; 
     }
@@ -124,8 +124,13 @@ class Url  {
    * Methode qui permet d'ajouter un url dans la BDD
    * Retourne true si OK false sinon
    */
-  public static function ajouterUrl($url_orgi, $url_court, $author) {
+  public static function ajouterUrl($url_orig, $url_court, $author) {
     global $pdo;
+    
+    // si le lien ne contient pas de http :
+    if( !strpos($url_orig, 'http://') ) {
+      $url_orig = "http://" . $url_orig;
+    }
     
     // on récupère l'id du pseudo :
     $id_aut = Membre::getIdFromPseudo($author);
@@ -133,7 +138,7 @@ class Url  {
     // si la recupération s'est bien passée, alors on insere dans la bdd :
     if( $id_aut != -1 ) {
       $req = $pdo->prepare("INSERT INTO urls (source, courte, auteur) VALUES (:sou, :cou, :aut);");
-      $req->bindParam(':sou', $url_orgi);
+      $req->bindParam(':sou', $url_orig);
       $req->bindParam(':cou', $url_court);
       $req->bindParam(':aut', $id_aut, PDO::PARAM_INT);
       $req->execute();
@@ -182,6 +187,23 @@ class Url  {
     $req->setFetchMode(PDO::FETCH_OBJ);
 
     return ($req->fetchAll());
+  }
+  
+  
+  /**
+   * Methode qui permet de recuperer l'url original à
+   * partir de l'url court
+   */
+  public static function getUrlOrig($url_court) {
+    global $pdo;
+    
+    $req = $pdo->prepare("SELECT source FROM urls WHERE courte=:cou;");
+    $req->bindParam(':cou', $url_court);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    $o = $req->fetchObject();
+    
+    return ($o->source);
   }
   
 

@@ -19,6 +19,7 @@ else { // sinon pas d'erreurs :
   
   // on génère l'url court :
   $url_court = Url::genererUrlCourt($_POST['url_orig']); 
+  $url_court_final = $_SERVER['SERVER_NAME'] . substr_replace($_SERVER['PHP_SELF'], "/q.php?u=".$url_court, -8);
   
   // si il est connecté :
   if(!empty($_SESSION['connex_active'])) {
@@ -36,7 +37,7 @@ else { // sinon pas d'erreurs :
     <table style="margin:auto; background:#EEEEEE; padding:5px;">
     <tr>
       <td>URL :</td>
-      <td><input type="text" name="url_short" value="<?php echo $url_court; ?>"></td>
+      <td><input type="text" name="url_short" value="<?php echo $url_court_final; ?>"></td>
     </tr>
     </table>
   </form>
