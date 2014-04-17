@@ -34,7 +34,6 @@ if(!empty($_SESSION['connex_active'])) {
       <th>auteur</th>
       <th>suppr</th>
     </tr>";
-  echo "<form name='suppr_liens' action='suppr_liens.php' method='POST'>";
   foreach( $tab as $res) {
     echo "<tr>
             <td>$res->id</td>
@@ -44,26 +43,11 @@ if(!empty($_SESSION['connex_active'])) {
             <td>";
     echo Membre::getPseudoFromId($res->auteur);
     echo "</td>";
-    
 	
-	//echo "<td><input type='checkbox' name='${res->id}' value='suppr' style='margin:auto; display:block;'></td>";
-	echo "<td><a href='suppr_liens.php?id=" .$res->id . "'> supprimer </a>";
-	
-
-	echo "</tr>";
+  	echo "<td><a href='suppr_liens.php?id=" . $res->id . "'>supprimer</a>";
+  	echo "</tr>";
   }
-   echo "</table>";
-  echo "<input style='display:block; margin:auto;' type='submit' value='Supprimer'>";
-  echo "</form></div>";
-?>
-
-	
-
- <?php 
-
- 
-  /****************************************************************/ 
-  
+  echo "</table>";
 }
 else {
   header("Location: index.php");

@@ -30,12 +30,12 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   $tab_membres = Membre::getAll();
   echo "<table border='1' style='margin: auto; display:none;' id='tab_m'>
         <tr>
-          <td>ID</td>
-          <td>Pseudo</td>
-          <td>Nom</td>
-          <td>Prenom</td>
-          <td>E-mail</td>
-          <td>Profil</td>
+          <th>ID</th>
+          <th>Pseudo</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>E-mail</th>
+          <th>Profil</th>
         </tr>";
 
   foreach( $tab_membres as $ligne) {
@@ -56,14 +56,13 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   echo "<div style='display:none;' id='tab_l'>"; 
   echo "<table border='1' style='margin: auto;'>
         <tr>
-          <td>ID</td>
-          <td>URL cible</td>
-          <td>URL courte</td>
-          <td>Créée le</td>
-          <td>Auteur</td>
-          <td>Suppr</td>
+          <th>ID</th>
+          <th>URL cible</th>
+          <th>URL courte</th>
+          <th>Créée le</th>
+          <th>Auteur</th>
+          <th>Suppr</th>
         </tr>";
-  echo "<form name='suppr_liens' action='suppr_lien.php' method='POST'>";
   foreach( $tab_liens as $ligne) {
     echo "<tr>
             <td>$ligne->id</td>
@@ -72,13 +71,10 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->creation</td>
             <td>";
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
-   //echo "<td><input type='checkbox' name='${res->id}' value='suppr' style='margin:auto; display:block;'></td>";
-	echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+  	echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
     echo "</tr>";
   }
-  echo "</table>";
-  echo "<input style='display:block; margin:auto;' type='submit' value='Supprimer'>";
-  echo "</form></div>";
+  echo "</table></form></div>";
 }
 else {
   header("Location: index.php");

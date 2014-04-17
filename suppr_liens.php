@@ -1,21 +1,8 @@
 <?php
-include_once("tools.php");
-include_once("config.php");
-
 include_once("Url.php");
-include_once("mes_liens.php");
 
-enteteHTML("Suppr liens");
-?>
+//TODO verifier que le lien appartient bien au pseudo connecté
 
-<?php
-	
-	Url::supprimerUrl($_GET['id']);
-	header("Location: mes_liens.php");
-?>
-
-	
-
-<?php 
-finHTML();
+Url::supprimerUrl($_GET['id']);
+header("Location: mes_liens.php");
 ?>
