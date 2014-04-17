@@ -36,6 +36,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
           <th>Prenom</th>
           <th>E-mail</th>
           <th>Profil</th>
+          <th>Suppr</th>
         </tr>";
 
   foreach( $tab_membres as $ligne) {
@@ -45,8 +46,11 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->nom</td>
             <td>$ligne->prenom</td>
             <td>$ligne->mail</td>
-            <td>$ligne->profil</td>
-          </tr>";
+            <td>$ligne->profil</td>";
+    
+    echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+
+    echo "</tr>";
   }
   echo "</table>";
 

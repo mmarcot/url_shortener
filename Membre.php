@@ -44,6 +44,19 @@ class Membre {
     $req_ins->bindParam(":prof", $profil);
     $req_ins->execute();
   }
+
+
+  /**
+   * Methode qui permet de supprimer un membre dans la BDD
+   * avec son id
+   */
+  public static function supprimerMembre($id_membre) {
+    global $pdo;
+  
+    $req_suppr = $pdo->prepare("DELETE FROM `membres` WHERE id=:id");
+    $req_suppr->bindParam(':id', $id_membre, PDO::PARAM_INT);
+    $req_suppr->execute();
+  }
   
   
   /**
