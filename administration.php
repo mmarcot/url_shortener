@@ -102,6 +102,9 @@ else {
   header("Location: index.php");
 }
 
-
+	$id_a = Membre::getIdFromProfil("administrateur");
+	
+	echo $id_a;
+	
 finHTML();
 ?>
