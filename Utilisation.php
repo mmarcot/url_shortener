@@ -1,5 +1,6 @@
 <?php 
 include_once("config.php");
+include_once("tools.php");
 
 /**
  * Classe permettant d'interfacer la table Utilisations
@@ -12,9 +13,8 @@ class Utilisation {
 	public static function ajouterUtilisation($id_url) {
 		global $pdo;
   
-    $req_ins = $pdo->prepare("INSERT INTO utilisations(url, date) VALUES(:url, :dat);");
+    $req_ins = $pdo->prepare("INSERT INTO utilisations(url) VALUES(:url);");
     $req_ins->bindParam(":url", $id_url);
-    $req_ins->bindParam(":dat", date());
     $req_ins->execute();
 	}
 
