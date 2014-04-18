@@ -37,6 +37,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
           <th>E-mail</th>
           <th>Profil</th>
           <th>Suppr</th>
+          <th>Modif</th>
         </tr>";
 
   foreach( $tab_membres as $ligne) {
@@ -62,11 +63,17 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	* Affichage du lien suppression pour tous les membres
 	* 	sauf pour le membre anonyme
 	*/
-	if(($ligne->id == $id_anonyme)||($ligne->id == $id_admin)) {
+	if($ligne->id == $id_anonyme) {
+		echo "<td><p></p>";
 		echo "<td><p></p>";
 	}
-	else {
+	else if($ligne->id == $id_admin) {
+		echo "<td><p></p>";
+		echo "<td><a href='XXXXXXXX.php?id=" . $ligne->id . "'>modifier</a>";
+	}
+	else if(($ligne->id != $id_anonyme)||($ligne->id != $id_admin)) {
 		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>modifier</a>";
 	}
     echo "</tr>";
   }
@@ -84,6 +91,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
           <th>Créée le</th>
           <th>Auteur</th>
           <th>Suppr</th>
+          <th>Modif</th>
         </tr>";
   foreach( $tab_liens as $ligne) {
     echo "<tr>
@@ -94,10 +102,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>";
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
 	
-
-	
-
 		echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+		echo "<td><a href='XXXXXX.php?id=" . $ligne->id . "'>modifier</a>";
 		
     echo "</tr>";
   }
