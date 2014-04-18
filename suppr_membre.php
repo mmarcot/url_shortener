@@ -9,11 +9,14 @@ if( isset($_SESSION['connex_active']) && Membre::estAdmin($_SESSION['connex_acti
 	*/	
 	$id_anonyme = Membre::getIdFromPseudo("anonyme");
 	
+	
 	if($_GET['id'] != $id_anonyme) {
 		Membre::supprimerMembre($_GET['id']);
-		
+		header("Location: administration.php");
 	}
-	else 
+	else {
+		header("Location: administration.php");
+	}
 	
 }
 else {
