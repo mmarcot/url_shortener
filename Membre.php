@@ -27,6 +27,40 @@ class Membre {
 
     return $etat;
   }
+
+
+  /**
+   * Methode qui crée un cookie de connexion sécurisé grace à l'id
+   * et à un hash md5
+   */
+  public static function creerCookie($id) {
+    $secret_word = 'cocolasticot';
+    $hash = md5($secret_word.$id);
+    setcookie('id',$id.'-'.$hash, time()+60*60*24*30);
+  }
+
+
+  /**
+   * Methode qui verifie le cookie et connecte l'user si
+   * il est OK
+   */
+  public static function verifierCookie() {
+    $etat = false;
+    $secret_word = 'cocolasticot';
+
+    if( isset($_COOKIE['id']) ) {
+      list($cookie_id,$cookie_hash) = explode('-',$_COOKIE['id']);
+      if (md5($secret_word.$cookie_id) == $cookie_hash) {
+        $id = $cookie_id;
+        $etat = true;
+      }
+
+      if( $etat )
+        $_SESSION['connex_active'] = Membre::getPseudoFromId($cookie_id); 
+    }
+
+    return $etat;
+  }
   
   
   /**

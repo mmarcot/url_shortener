@@ -17,7 +17,9 @@ if( isset($_POST['pseudo_c']) && isset($_POST['pass_c']) ) {
   $trouve = false;
   foreach( $req as $ligne ) {
     if( $ligne->mdp == crypt($_POST['pass_c'], 'rl') ) {
+      // la connexion est OK, on l'active et on crée le cookie :
       $_SESSION['connex_active'] = "$_POST[pseudo_c]";
+      Membre::creerCookie(Membre::getIdFromPseudo($_POST['pseudo_c']));
       $trouve = true;
       header("Location: index.php");
     }

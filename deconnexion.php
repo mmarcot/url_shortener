@@ -7,7 +7,7 @@ header("Location: index.php");
 enteteHTML("deco");
 enteteTitreHTML("deco");
 
-
+setcookie('id', "");
 
 finHTML();
 ?>

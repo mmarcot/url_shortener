@@ -4,6 +4,7 @@ include_once("config.php");
 include_once("Membre.php");
 enteteHTML("Raccourcisseur d'URL");
 
+Membre::verifierCookie();
 
 // affichage de la barre de connexion supérieure :
 if(!empty($_SESSION['connex_active'])) {
