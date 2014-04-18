@@ -54,10 +54,15 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	$id_anonyme = Membre::getIdFromPseudo("anonyme");
 	
 	/**
+	* Recuperation de l'id de l'administateur
+	*/
+	$id_admin = Membre::getIdFromProfil("administrateur");
+		
+	/**
 	* Affichage du lien suppression pour tous les membres
 	* 	sauf pour le membre anonyme
 	*/
-	if($ligne->id == $id_anonyme) {
+	if(($ligne->id == $id_anonyme)||($ligne->id == $id_admin)) {
 		echo "<td><p></p>";
 	}
 	else {
@@ -101,10 +106,6 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 else {
   header("Location: index.php");
 }
-
-	$id_a = Membre::getIdFromProfil("administrateur");
-	
-	echo $id_a;
 	
 finHTML();
 ?>
