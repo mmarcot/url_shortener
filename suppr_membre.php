@@ -3,8 +3,18 @@ include_once("Membre.php");
 
 
 if( isset($_SESSION['connex_active']) && Membre::estAdmin($_SESSION['connex_active']) ) {
-	Membre::supprimerMembre($_GET['id']);
-	header("Location: administration.php");
+	
+	/**
+	* Recuperation de l'id du membre anonyme
+	*/	
+	$id_anonyme = Membre::getIdFromPseudo("anonyme");
+	
+	if($_GET['id'] != $id_anonyme) {
+		Membre::supprimerMembre($_GET['id']);
+		
+	}
+	else 
+	
 }
 else {
 	header("Location: index.php");
