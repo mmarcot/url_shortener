@@ -51,13 +51,13 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	/**
 	* Recuperation de l'id du membre anonyme
 	*/	
-	$test = Membre::getIdFromPseudo("anonyme");
+	$id_anonyme = Membre::getIdFromPseudo("anonyme");
 	
 	/**
 	* Affichage du lien suppression pour tous les membres
 	* 	sauf pour le membre anonyme
 	*/
-	if($ligne->id == $test) {
+	if($ligne->id == $id_anonyme) {
 		echo "<td><p></p>";
 	}
 	else {
