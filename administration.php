@@ -48,8 +48,26 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->mail</td>
             <td>$ligne->profil</td>";
     
-    echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
-
+	/**
+	* Recuperation de l'id du membre anonyme
+	*/	
+	$id_anonyme = Membre::getIdFromPseudo("anonyme");
+	
+	/**
+	* Recuperation de l'id de l'administateur
+	*/
+	$id_admin = Membre::getIdFromProfil("administrateur");
+		
+	/**
+	* Affichage du lien suppression pour tous les membres
+	* 	sauf pour le membre anonyme
+	*/
+	if(($ligne->id == $id_anonyme)||($ligne->id == $id_admin)) {
+		echo "<td><p></p>";
+	}
+	else {
+		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+	}
     echo "</tr>";
   }
   echo "</table>";
@@ -75,7 +93,12 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->creation</td>
             <td>";
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
-  	echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+	
+
+	
+
+		echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+		
     echo "</tr>";
   }
   echo "</table></form></div>";
@@ -83,6 +106,6 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 else {
   header("Location: index.php");
 }
-
+	
 finHTML();
 ?>
