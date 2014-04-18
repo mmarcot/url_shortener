@@ -10,7 +10,6 @@ if( isset($_SESSION['connex_active']) && Membre::estAdmin($_SESSION['connex_acti
 	$id_anonyme = Membre::getIdFromPseudo("anonyme");
 	
 	
-	
 	/**
 	*	Verification si l'id passer en get n'est pas id du membre anonyme
 	*/
