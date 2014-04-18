@@ -48,8 +48,22 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->mail</td>
             <td>$ligne->profil</td>";
     
-    echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
-
+	/**
+	* Recuperation de l'id du membre anonyme
+	*/
+	
+	$test = Membre::getIdFromPseudo("anonyme");
+	
+	/**
+	* Affichage du lien suppression pour tous les membres
+	* 	sauf pour le membre anonyme
+	*/
+	if($ligne->id == $test) {
+		echo "<td><p></p>";
+	}
+	else {
+		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+	}
     echo "</tr>";
   }
   echo "</table>";
@@ -75,7 +89,12 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->creation</td>
             <td>";
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
-  	echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+	
+
+	
+
+		echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+		
     echo "</tr>";
   }
   echo "</table></form></div>";
@@ -83,6 +102,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 else {
   header("Location: index.php");
 }
+
 
 finHTML();
 ?>
