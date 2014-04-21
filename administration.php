@@ -69,26 +69,18 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	}
 	else if($admin == true) { // si admin
 		echo "<td><p></p>";
-		echo "<td><a href='Modification.php?id=" . $ligne->id . "'>modifier</a>";
+		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
 	}
 	else if($admin == false) { //si membre
 		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
-		echo "<td><a href='Modification.php?id=" . $ligne->id . "'>modifier</a>";
+		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
 	}
     echo "</tr>";
   }
   echo "</table>";
-
-  echo "<form method='post' action='Menu_modif.php'>
-		<br>
-		<br> 
-		Pseudo : <input type='text name='pseudo'/>
-		<br>
-		<br> 
-		<input type='submit' name='modif' value='Modifier'/>
-	</form>";
   
-
+  
+  
   // ######### affichage du tableau des liens #########
   $tab_liens = Url::getAll();
   echo "<div style='display:none;' id='tab_l'>"; 
@@ -121,6 +113,37 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 else {
   header("Location: index.php");
 }
+
+	echo "
+	<h2 style='text-align:center;'>MODIFICATION</h2>
+	<form action='Menu_modif.php' method='post' accept-charset='utf-8'>
+	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
+		<tr>
+		  <td>Pseudo :</td>
+		  <td><input type='text' name='pseudo_m' value=''></td>
+		</tr>
+		<tr>
+		  <td>Nom :</td>
+		  <td><input type='text' name='nom_m' value=''></td>
+		</tr>
+		<tr>
+		  <td>Prenom :</td>
+		  <td><input type='text' name='prenom_m' value=''></td>
+		</tr>
+		<tr>
+		  <td>Email :</td>
+		  <td><input type='text' name='email_m' value=''></td>
+		</tr>
+		<tr>
+		  <td>Profil :</td>
+		  <td><input type='text' name='profil_m' value=''></td>
+		</tr>
+	  </table>
+
+	  <p style='text-align:center;'>
+		<input type='submit' value='Modifier &rarr;'>
+	  </p>
+	</form>";
 	
 finHTML();
 ?>
