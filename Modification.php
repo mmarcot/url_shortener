@@ -48,6 +48,14 @@ class Modification {
 		$req_modif_email->setFetchMode(PDO::FETCH_OBJ)
 	}
 	
+	public static function modifProfil($NProfil) {
+		global $pdo;
+	
+		$req_modif_profil = $pdo->prepare("UPDATE `membres` SET `prefil`=:NProfil WHERE id=:id");
+		$req_modif_profil->bindParam(':$NProfil', $NProfil);
+		$req_modif_profil->execute();
+		$req_modif_profil->setFetchMode(PDO::FETCH_OBJ)
+	}
 }
 
 ?>
