@@ -79,6 +79,15 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   }
   echo "</table>";
 
+  echo "<form method='post' action='Menu_modif.php'>
+		<br>
+		<br> 
+		Pseudo : <input type='text name='pseudo'/>
+		<br>
+		<br> 
+		<input type='submit' name='modif' value='Modifier'/>
+	</form>";
+  
 
   // ######### affichage du tableau des liens #########
   $tab_liens = Url::getAll();
