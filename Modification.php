@@ -39,6 +39,15 @@ class Modification {
 		$req_modif_prenom->setFetchMode(PDO::FETCH_OBJ)
 	}
 	
+	public static function modifEmail($id, $NEmail) {
+		global $pdo;
+	
+		$req_modif_email = $pdo->prepare("UPDATE `membres` SET `email`=:NEmail WHERE id=:id");
+		$req_modif_email->bindParam(':$NEmail', $NEmail);
+		$req_modif_email->execute();
+		$req_modif_email->setFetchMode(PDO::FETCH_OBJ)
+	}
+	
 }
 
 ?>
