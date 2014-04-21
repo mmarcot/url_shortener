@@ -30,6 +30,15 @@ class Modification {
 	
 	}
 	
+	public static function modifPrenom($id, $NPrenom) {
+		global $pdo;
+	
+		$req_modif_prenom = $pdo->prepare("UPDATE `membres` SET `prenom`=:NPrenom WHERE id=:id");
+		$req_modif_prenom->bindParam(':NPrenom', $NPrenom);
+		$req_modif_prenom->execute();
+		$req_modif_prenom->setFetchMode(PDO::FETCH_OBJ)
+	}
+	
 }
 
 ?>
