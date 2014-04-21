@@ -11,7 +11,7 @@ class Modification {
 	///////////////////////////////////////////////////////////////////////
 	// MODIFICATION														///
 	///////////////////////////////////////////////////////////////////////
-	public static function modifPseudo($NPseudo) {
+	public static function modifPseudo($id, $NPseudo) {
 		global $pdo;
 	
 		$req_modif_pseudo = $pdo->prepare("UPDATE `membres` SET `pseudo`=:NPseudo WHERE id=:id");
@@ -20,17 +20,16 @@ class Modification {
 		$req_modif_pseudo->setFetchMode(PDO::FETCH_OBJ);
 	}
 	
-	public static function modifNom($id) {
+	public static function modifNom($id, $NNom) {
+		global $pdo;
+	
+		$req_modif_nom = $pdo->prepare("UPDATE `membres` SET `nom`=:NNom WHERE id=:id");
+		$req_modif_nom->bindParam(':NNom', $NNom);
+		$req_modif_nom->execute();
+		$req_modif_nom->setFetchMode(PDO::FETCH_OBJ)
+	
 	}
 	
-	public static function modifPrenom($id) {
-	}
-	
-	public static function modifEmail($id) {
-	}
-	
-	public static function modifProfil($id) {
-	}
 }
 
 ?>
