@@ -69,11 +69,11 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	}
 	else if($admin == true) { // si admin
 		echo "<td><p></p>";
-		echo "<td><a href='XXXXXXXX.php?id=" . $ligne->id . "'>modifier</a>";
+		echo "<td><a href='Modification.php?id=" . $ligne->id . "'>modifier</a>";
 	}
 	else if($admin == false) { //si membre
 		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
-		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>modifier</a>";
+		echo "<td><a href='Modification.php?id=" . $ligne->id . "'>modifier</a>";
 	}
     echo "</tr>";
   }
