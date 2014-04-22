@@ -3,7 +3,7 @@ include_once("Url.php");
 include_once("Utilisation.php");
 
 if(!empty($_GET['u'])) {
-  // on cherche dans la BDD :
+  // on cherche dans la BDD l'url original correspondant :
   $url_orig = Url::getUrlOrig($_GET['u']);
 
   // on ajoute une utilisation :
