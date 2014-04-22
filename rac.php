@@ -17,8 +17,8 @@ else if( !Url::verifier($_POST['url_orig']) ) {
 }
 else { // sinon pas d'erreurs :
   
-  // on génère l'url court :
-  $url_court = Url::genererUrlCourt($_POST['url_orig']); 
+
+  $url_court = Url::genererUrlCourt($_POST['url_orig']);
   $url_court_final = $_SERVER['SERVER_NAME'] . substr_replace($_SERVER['PHP_SELF'], "/q.php?u=".$url_court, -8);
   
   // si il est connecté :

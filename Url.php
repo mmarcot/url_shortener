@@ -20,8 +20,7 @@ class Url  {
     $etatSyn = Url::verifierSynthaxe($url);
     $etatCib = Url::verifierCible($url);
     
-    //TODO si l'url existe deja retourner l'url existant ##################
-    if( $etatSyn && $etatCib && !Url::verifierExisteDejaOrig($url) )
+    if( $etatSyn && $etatCib )
       return true;
     else 
       return false;
@@ -73,22 +72,22 @@ class Url  {
   /**
    * Methode qui verifie si l'url original existe deja dans la BDD
    */
-  public static function verifierExisteDejaOrig($url_orig) {
+  public static function verifierExisteDejaOrig($url_orig) { //TODO inutilisé
     global $pdo;
 
-    $ex_deja = false;
+    $url_court = "";
     
-    $req = $pdo->prepare("SELECT source FROM urls WHERE source=:sou;");
+    $req = $pdo->prepare("SELECT source, courte FROM urls WHERE source=:sou;");
     $req->bindParam(":sou", $url_orig);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_OBJ);
     foreach( $req as $ligne ) {
       // si la requete remonte 1 ligne ou plus
       // on met c'est que ca existe déja dans la base :
-      $ex_deja = true;
+      $url_court = $ligne->courte;
     } 
 
-    return $ex_deja;
+    return $url_court;
   }
 
 
@@ -209,21 +208,6 @@ class Url  {
     $o = $req->fetchObject();
     
     return ($o->source);
-  }
-
-  /**
-   * Methode qui donne l'id grace à son url_court
-   */
-  public static function getIdByUrlCourt($url_court) {
-    global $pdo;
-
-    $req = $pdo->prepare("SELECT id, courte FROM urls WHERE courte=:cou;");
-    $req->bindParam(':cou', $url_court);
-    $req->execute();
-    $req->setFetchMode(PDO::FETCH_OBJ);
-    $o = $req->fetchObject();
-
-    return ($o->id);
   }
   
 }
