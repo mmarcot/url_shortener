@@ -119,6 +119,10 @@ else {
 	<form action='Menu_modif.php' method='post' accept-charset='utf-8'>
 	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
 		<tr>
+		  <td>ID :</td>
+		  <td><input type='text' name='id_m' value=''></td>
+		</tr>
+		<tr>
 		  <td>Pseudo :</td>
 		  <td><input type='text' name='pseudo_m' value=''></td>
 		</tr>
@@ -144,6 +148,12 @@ else {
 		<input type='submit' value='Modifier &rarr;'>
 	  </p>
 	</form>";
+	
+	echo $_POST['pseudo_m'];
+	echo $_POST['nom_m'];
+	echo $_POST['prenom_m'];
+	echo $_POST['email_m'];
+	echo $_POST['profil_m'];
 	
 finHTML();
 ?>
