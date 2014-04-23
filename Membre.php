@@ -159,23 +159,11 @@ class Membre {
     }
     return $pseudo;
   }
-  
-  /**
-  * Methode qui permet de recuperer l'id de l'administrateur
-  */
-  public static function getIdFromProfil($profil) {
-	global $pdo;
+
+	///////////////////////////////////////////////////////////////////////
+	// MODIFICATION														///
+	///////////////////////////////////////////////////////////////////////
 	
-	$req_id_admin = $pdo->prepare("SELECT id FROM membres WHERE profil=:prof");
-	$req_id_admin->bindParam(':prof', $profil);
-	$req_id_admin->execute();
-	$req_id_admin->setFetchMode(PDO::FETCH_OBJ);
-	foreach($req_id_admin as $ligne) {
-      $id_admin = $ligne->id;
-    }
-	
-	return $id_admin;
-  }
 }
 
 ?>
