@@ -25,16 +25,17 @@ include_once("Modification.php");
 		  <td>Email :</td>
 		  <td><input type='text' name='mail_m' value=''></td>
 		</tr>
-		<tr>
-		  <td>Profil :</td>
-		  <td><input type='text' name='profil_m' value=''></td>
-		</tr>
-	  </table>
-
+		
 	  <p style='text-align:center;'>
 		<input type='submit' value='Modifier &rarr;'>
 	  </p>
-	</form>";
+	</form>
+	
+	<p style='text-align:center;'>
+	<select name = 'profil'>
+	<option>membre</option>
+	<option>administrateur</option>
+	</select>";
 	
 	echo"<p style='text-align:center;'>
 	<a href='administration.php'>retour</a>";
