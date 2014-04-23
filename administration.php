@@ -114,46 +114,7 @@ else {
   header("Location: index.php");
 }
 
-	echo "
-	<h2 style='text-align:center;'>MODIFICATION</h2>
-	<form action='Menu_modif.php' method='post' accept-charset='utf-8'>
-	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
-		<tr>
-		  <td>ID :</td>
-		  <td><input type='text' name='id_m' value=''></td>
-		</tr>
-		<tr>
-		  <td>Pseudo :</td>
-		  <td><input type='text' name='pseudo_m' value=''></td>
-		</tr>
-		<tr>
-		  <td>Nom :</td>
-		  <td><input type='text' name='nom_m' value=''></td>
-		</tr>
-		<tr>
-		  <td>Prenom :</td>
-		  <td><input type='text' name='prenom_m' value=''></td>
-		</tr>
-		<tr>
-		  <td>Email :</td>
-		  <td><input type='text' name='email_m' value=''></td>
-		</tr>
-		<tr>
-		  <td>Profil :</td>
-		  <td><input type='text' name='profil_m' value=''></td>
-		</tr>
-	  </table>
 
-	  <p style='text-align:center;'>
-		<input type='submit' value='Modifier &rarr;'>
-	  </p>
-	</form>";
-	
-	echo $_POST['pseudo_m'];
-	echo $_POST['nom_m'];
-	echo $_POST['prenom_m'];
-	echo $_POST['email_m'];
-	echo $_POST['profil_m'];
 	
 finHTML();
 ?>
