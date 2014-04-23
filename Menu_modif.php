@@ -1,5 +1,8 @@
 <?php
 include_once("Modification.php");
+include_once("tools.php");
+
+enteteHTML("Modification");
 
 // affichage de la barre de connexion :
 if(!empty($_SESSION['connex_active']))
@@ -12,7 +15,7 @@ $prenom = Modification::getPrenomFromId($_GET['id']);
 $email = Modification::getEmailFromId($_GET['id']);
 $profil = Modification::getProfilFromId($_GET['id']);
 
-echo <<<FORM
+echo <<<DEB_FORM
 <h2 style='text-align:center;'>Modification</h2>
 <form action='administration.php' method='post' accept-charset='utf-8'>
   <table style='margin:auto; background:#EEEEEE; padding:5px;'>
@@ -39,10 +42,22 @@ echo <<<FORM
 	<tr>
 		<td>Profil :</td>
 		<td>
-			<input type = 'radio' name = 'profil_m' value = 'administrateur'/>
-			Administrateur 
-			<input type = 'radio' name = 'profil_m' value = 'membre'/>
-			Membre											
+DEB_FORM;
+
+// précochage du radio-button correspondant au profil :
+if( $profil == 'administrateur' )
+	echo "<input checked type='radio' name='profil_m' id='adm' value='administrateur'/>
+		<label for='adm'>Administrateur</label> 
+		<input type = 'radio' name = 'profil_m' id='memb' value = 'membre'/>
+		<label for='memb'>Membre</label>";
+else {
+	echo "<input type='radio' name='profil_m' id='adm' value='administrateur'/>
+		<label for='adm'>Administrateur</label> 
+		<input checked type = 'radio' name = 'profil_m' id='memb' value = 'membre'/>
+		<label for='memb'>Membre</label>";
+}
+
+echo <<<FIN_FORM
 		</td>
 	</tr>
 </table>
@@ -51,9 +66,11 @@ echo <<<FORM
 	<input type='submit' value='Modifier &rarr;'>
   </p>
 </form>
-FORM;
+FIN_FORM;
+
 
 echo"<p style='text-align:center;'>
 	<a href='administration.php'>retour</a></p>";
 
+finHTML();
 ?>
