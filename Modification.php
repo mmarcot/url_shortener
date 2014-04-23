@@ -1,17 +1,17 @@
 <?php
 include_once("config.php");
 include_once("tools.php");
-include_once("Menu_modif.php");
+
 
 /**
  * Classe qui regroupe un ensemble de methodes statiques
- * pour la gestion des membres 
+ * pour la gestion des modifications membre 
  */
 class Modification {
 
-	///////////////////////////////////////////////////////////////////////
-	// MODIFICATION														///
-	///////////////////////////////////////////////////////////////////////
+	/**
+	 * Methode qui permet de modifier le pseudo d'un membre dans la BDD
+	 */
 	public static function modifPseudo($id, $NPseudo) {
 		global $pdo;
 	
@@ -22,6 +22,10 @@ class Modification {
 		$req_modif_pseudo->setFetchMode(PDO::FETCH_OBJ);
 	}
 	
+
+	/**
+	 * Methode qui permet de modifier le nom d'un membre dans la BDD
+	 */
 	public static function modifNom($id, $NNom) {
 		global $pdo;
 	
@@ -33,6 +37,10 @@ class Modification {
 	
 	}
 	
+
+	/**
+	 * Methode qui permet de modifier le prenom d'un membre dans la BDD
+	 */
 	public static function modifPrenom($id, $NPrenom) {
 		global $pdo;
 	
@@ -43,6 +51,10 @@ class Modification {
 		$req_modif_prenom->setFetchMode(PDO::FETCH_OBJ);
 	}
 
+
+	/**
+	 * Methode qui permet de modifier le mail d'un membre dans la BDD
+	 */
 	public static function modifEmail($id, $NEmail) {
 		global $pdo;
 	
@@ -53,6 +65,10 @@ class Modification {
 		$req_modif_email->setFetchMode(PDO::FETCH_OBJ);
 	}
 	
+
+	/**
+	 * Methode qui permet de modifier le profil(membre/admin) d'un membre dans la BDD
+	 */
 	public static function modifProfil($id, $NProfil) {
 		global $pdo;
 	
@@ -62,10 +78,11 @@ class Modification {
 		$req_modif_profil->execute();
 		$req_modif_profil->setFetchMode(PDO::FETCH_OBJ);
 	}
-	///////////////////////////////////////////////////////////////////////
-	// RECUPERATION														///
-	///////////////////////////////////////////////////////////////////////
+
 	
+	/**
+	 * Methode qui permet de récupérer le pseudo à partir de l'id
+	 */	
 	public static function getPseudoFromId($id) {
 		global $pdo;
 		$pseudo = "";
@@ -74,13 +91,16 @@ class Modification {
 		$req_recup_pseudo->execute();
 		$req_recup_pseudo->setFetchMode(PDO::FETCH_OBJ);
     
-		
 		foreach($req_recup_pseudo as $ligne) {
 			$pseudo = $ligne->pseudo;
 		}
 		return $pseudo;
 	}
 	
+
+	/**
+	 * Methode qui permet de récupérer le nom à partir de l'id
+	 */
 	public static function getNomFromId($id) {
 		global $pdo;
 		$nom = "";
@@ -89,12 +109,16 @@ class Modification {
 		$req_recup_nom->execute();
 		$req_recup_nom->setFetchMode(PDO::FETCH_OBJ);
     
-		
 		foreach($req_recup_nom as $ligne) {
 			$nom = $ligne->nom;
 		}
 		return $nom;
 	}
+
+
+	/**
+	 * Methode qui permet de récupérer le prénom à partir de l'id
+	 */
 	public static function getPrenomFromId($id) {
 		global $pdo;
 		$prenom = "";
@@ -102,13 +126,18 @@ class Modification {
 		$req_recup_prenom->bindParam(':rid', $id, PDO::PARAM_INT);
 		$req_recup_prenom->execute();
 		$req_recup_prenom->setFetchMode(PDO::FETCH_OBJ);
-    
 		
 		foreach($req_recup_prenom as $ligne) {
 			$prenom = $ligne->prenom;
 		}
 		return $prenom;
 	}
+
+
+
+	/**
+	 * Methode qui permet de récupérer le mail à partir de l'id
+	 */
 	public static function getEmailFromId($id) {
 		global $pdo;
 		$mail = "";
@@ -117,12 +146,16 @@ class Modification {
 		$req_recup_mail->execute();
 		$req_recup_mail->setFetchMode(PDO::FETCH_OBJ);
     
-		
 		foreach($req_recup_mail as $ligne) {
 			$mail = $ligne->mail;
 		}
 		return $mail;
 	}
+
+
+	/**
+	 * Methode qui permet de récupérer le profil à partir de l'id
+	 */
 	public static function getProfilFromId($id) {
 		global $pdo;
 		$profil = "";
@@ -131,7 +164,6 @@ class Modification {
 		$req_recup_profil->execute();
 		$req_recup_profil->setFetchMode(PDO::FETCH_OBJ);
     
-		
 		foreach($req_recup_profil as $ligne) {
 			$profil = $ligne->profil;
 		}

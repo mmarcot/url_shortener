@@ -1,6 +1,8 @@
 <?php
 include_once("Membre.php");
 include_once("Url.php");
+include_once("Modification.php");
+
 enteteHTML("Espace admin");
 
 // on verifie si c'est un admin avant de faire quoi que ce soit :
@@ -23,8 +25,22 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
   echo "</table>";
 
-
-  //TODO modif/suppr de liens/membres
+  // En cas de modification :
+  if((!empty($_POST['id_m']))&&(!empty($_POST['pseudo_m']))) {
+    Modification::modifPseudo($_POST['id_m'], $_POST['pseudo_m']);
+    }
+  if((!empty($_POST['id_m']))&&(!empty($_POST['nom_m']))) {
+    Modification::modifNom($_POST['id_m'], $_POST['nom_m']);
+  }
+  if((!empty($_POST['id_m']))&&(!empty($_POST['prenom_m']))) {
+    Modification::modifPrenom($_POST['id_m'], $_POST['prenom_m']);
+  }
+  if((!empty($_POST['id_m']))&&(!empty($_POST['mail_m']))) {
+    Modification::modifEmail($_POST['id_m'], $_POST['mail_m']);
+  }
+  if((!empty($_POST['id_m']))&&(!empty($_POST['profil_m']))) {
+    Modification::modifProfil($_POST['id_m'], $_POST['profil_m']);
+  }
 
   // ######### affichage du tableau des membres #########
   $tab_membres = Membre::getAll();
@@ -49,36 +65,29 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>$ligne->mail</td>
             <td>$ligne->profil</td>";
     
-	/**
-	* Recuperation de l'id du membre anonyme
-	*/	
-	$id_anonyme = Membre::getIdFromPseudo("anonyme");
-	
-	/**
-	* Recuperation des administrateurs
-	*/
-	$admin = Membre::estAdmin($ligne->pseudo);
-	
-	/**
-	* Affichage du lien suppression pour tous les membres
-	* 	sauf pour le membre anonyme
-	*/
-	if($ligne->id == $id_anonyme) { // si anonyme
-		echo "<td><p></p>";
-		echo "<td><p></p>";
-	}
-	else if($admin == true) { // si admin
-		echo "<td><p></p>";
-		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
-	}
-	else if($admin == false) { //si membre
-		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
-		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
-	}
+  	// Recuperation de l'id du membre anonyme :
+  	$id_anonyme = Membre::getIdFromPseudo("anonyme");
+  	
+  	// Recuperation des administrateurs :
+  	$admin = Membre::estAdmin($ligne->pseudo);
+  	
+  	// Affichage du lien suppression pour tous les membres
+  	// sauf pour le membre anonyme :
+  	if($ligne->id == $id_anonyme) { // si anonyme
+  		echo "<td><p></p>";
+  		echo "<td><p></p>";
+  	}
+  	else if($admin == true) { // si admin
+  		echo "<td><p></p>";
+  		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
+  	}
+  	else if($admin == false) { //si membre
+  		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+  		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
+  	}
     echo "</tr>";
   }
   echo "</table>";
-  
   
   
   // ######### affichage du tableau des liens #########
@@ -108,7 +117,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 		
     echo "</tr>";
   }
-  echo "</table></form></div>";
+  echo "</table></div>";
 }
 else {
   header("Location: index.php");
