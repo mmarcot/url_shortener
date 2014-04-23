@@ -26,20 +26,22 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   echo "</table>";
 
   // En cas de modification :
-  if((!empty($_POST['id_m']))&&(!empty($_POST['pseudo_m']))) {
-    Modification::modifPseudo($_POST['id_m'], $_POST['pseudo_m']);
-    }
-  if((!empty($_POST['id_m']))&&(!empty($_POST['nom_m']))) {
-    Modification::modifNom($_POST['id_m'], $_POST['nom_m']);
-  }
-  if((!empty($_POST['id_m']))&&(!empty($_POST['prenom_m']))) {
-    Modification::modifPrenom($_POST['id_m'], $_POST['prenom_m']);
-  }
-  if((!empty($_POST['id_m']))&&(!empty($_POST['mail_m']))) {
-    Modification::modifEmail($_POST['id_m'], $_POST['mail_m']);
-  }
-  if((!empty($_POST['id_m']))&&(!empty($_POST['profil_m']))) {
-    Modification::modifProfil($_POST['id_m'], $_POST['profil_m']);
+  if( !empty($_POST['id_m']) ) {
+    
+    if(!empty($_POST['pseudo_m'])) 
+      Modification::modifPseudo($_POST['id_m'], $_POST['pseudo_m']);
+
+    if(!empty($_POST['nom_m'])) 
+      Modification::modifNom($_POST['id_m'], $_POST['nom_m']);
+
+    if(!empty($_POST['prenom_m'])) 
+      Modification::modifPrenom($_POST['id_m'], $_POST['prenom_m']);
+
+    if(!empty($_POST['mail_m']))
+      Modification::modifEmail($_POST['id_m'], $_POST['mail_m']);
+
+    if(!empty($_POST['profil_m'])) 
+      Modification::modifProfil($_POST['id_m'], $_POST['profil_m']);
   }
 
   // ######### affichage du tableau des membres #########

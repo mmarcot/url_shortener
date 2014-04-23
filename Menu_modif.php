@@ -1,6 +1,11 @@
 <?php
 include_once("Modification.php");
+
+// affichage de la barre de connexion :
+if(!empty($_SESSION['connex_active']))
+  barreConnexion($_SESSION['connex_active']);
 	
+// on récupère les info originales :
 $pseudo = Modification::getPseudoFromId($_GET['id']);
 $nom = Modification::getNomFromId($_GET['id']);
 $prenom = Modification::getPrenomFromId($_GET['id']);
@@ -8,7 +13,7 @@ $email = Modification::getEmailFromId($_GET['id']);
 $profil = Modification::getProfilFromId($_GET['id']);
 
 echo <<<FORM
-<h2 style='text-align:center;'>MODIFICATION</h2>
+<h2 style='text-align:center;'>Modification</h2>
 <form action='administration.php' method='post' accept-charset='utf-8'>
   <table style='margin:auto; background:#EEEEEE; padding:5px;'>
 	<tr>
@@ -34,11 +39,10 @@ echo <<<FORM
 	<tr>
 		<td>Profil :</td>
 		<td>
-		<input type = 'radio' name = 'choix' value = 'administrateur'/>
-		Administrateur 
-		
-		<input type = 'radio' name = 'choix' value = 'membre'/>
-		Membre											
+			<input type = 'radio' name = 'profil_m' value = 'administrateur'/>
+			Administrateur 
+			<input type = 'radio' name = 'profil_m' value = 'membre'/>
+			Membre											
 		</td>
 	</tr>
 </table>
