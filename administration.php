@@ -37,6 +37,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
           <th>E-mail</th>
           <th>Profil</th>
           <th>Suppr</th>
+          <th>Modif</th>
         </tr>";
 
   foreach( $tab_membres as $ligne) {
@@ -54,25 +55,32 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	$id_anonyme = Membre::getIdFromPseudo("anonyme");
 	
 	/**
-	* Recuperation de l'id de l'administateur
+	* Recuperation des administrateurs
 	*/
-	$id_admin = Membre::getIdFromProfil("administrateur");
-		
+	$admin = Membre::estAdmin($ligne->pseudo);
+	
 	/**
 	* Affichage du lien suppression pour tous les membres
 	* 	sauf pour le membre anonyme
 	*/
-	if(($ligne->id == $id_anonyme)||($ligne->id == $id_admin)) {
+	if($ligne->id == $id_anonyme) { // si anonyme
+		echo "<td><p></p>";
 		echo "<td><p></p>";
 	}
-	else {
+	else if($admin == true) { // si admin
+		echo "<td><p></p>";
+		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
+	}
+	else if($admin == false) { //si membre
 		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+		echo "<td><a href='Menu_modif.php?id=" . $ligne->id . "'>modifier</a>";
 	}
     echo "</tr>";
   }
   echo "</table>";
-
-
+  
+  
+  
   // ######### affichage du tableau des liens #########
   $tab_liens = Url::getAll();
   echo "<div style='display:none;' id='tab_l'>"; 
@@ -84,6 +92,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
           <th>Créée le</th>
           <th>Auteur</th>
           <th>Suppr</th>
+          <th>Modif</th>
         </tr>";
   foreach( $tab_liens as $ligne) {
     echo "<tr>
@@ -94,10 +103,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
             <td>";
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
 	
-
-	
-
 		echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
+		echo "<td><a href='XXXXXX.php?id=" . $ligne->id . "'>modifier</a>";
 		
     echo "</tr>";
   }
@@ -106,6 +113,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 else {
   header("Location: index.php");
 }
+
+
 	
 finHTML();
 ?>
