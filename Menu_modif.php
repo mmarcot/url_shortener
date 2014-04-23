@@ -1,6 +1,8 @@
 <?php
 include_once("Modification.php");
 	
+	echo $_GET['id'];
+	
 	$pseudo = Modification::getPseudoFromId($_GET['id']);
 	$nom = Modification::getNomFromId($_GET['id']);
 	$prenom = Modification::getPrenomFromId($_GET['id']);

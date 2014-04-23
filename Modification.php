@@ -1,6 +1,7 @@
 <?php
 include_once("config.php");
 include_once("tools.php");
+include_once("Menu_modif.php");
 
 /**
  * Classe qui regroupe un ensemble de methodes statiques
