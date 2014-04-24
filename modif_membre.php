@@ -70,7 +70,7 @@ FIN_FORM;
 
 
 echo"<p style='text-align:center;'>
-	<a href='administration.php'>retour</a></p>";
+	<a href='administration.php'>Retour</a></p>";
 
 finHTML();
 ?>
