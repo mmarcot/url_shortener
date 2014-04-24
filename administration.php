@@ -27,7 +27,6 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 
   // En cas de modification :
   if( !empty($_POST['id_m']) ) {
-    
     if(!empty($_POST['pseudo_m'])) 
       Modification::modifPseudo($_POST['id_m'], $_POST['pseudo_m']);
 

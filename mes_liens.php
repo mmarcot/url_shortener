@@ -20,8 +20,8 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'url');
+        data.addColumn('number', 'utilisation');
 
         data.addRows([
           ['Mushrooms', 3],
@@ -103,6 +103,7 @@ if(!empty($_SESSION['connex_active'])) {
   }
   echo "</table>";
 
+  // insertion du camembert Google :
   echo "<div id='chart_div'></div>";
 
 }
