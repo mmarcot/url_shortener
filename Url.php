@@ -210,6 +210,23 @@ class Url  {
     return ($o->source);
   }
   
+
+  /**
+   * Methode qui donne l'id grace à son url court
+   */
+  public static function getIdByUrlCourt($url_court) {
+    global $pdo;
+    
+    $req = $pdo->prepare("SELECT id, courte FROM urls WHERE courte=:cou;");
+    $req->bindParam(':cou', $url_court);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    $o = $req->fetchObject();
+    
+    return ($o->id);
+
+  }
+  
 }
 ?>
 
