@@ -114,7 +114,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
     echo Membre::getPseudoFromId($ligne->auteur) . "</td>";
 	
 		echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'> supprimer </a>";
-		echo "<td><a href='XXXXXX.php?id=" . $ligne->id . "'>modifier</a>";
+		echo "<td><a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>";
 		
     echo "</tr>";
   }
