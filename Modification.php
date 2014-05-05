@@ -170,6 +170,73 @@ class Modification {
 		return $profil;
 	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MODIFICATION DES LIENS
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+	  
+  /**
+  * Methode qui donne l'url source a partir de l'id
+  */
+  public static function getCibleById($id) {
+	global $pdo;
+	
+	$res = "";
+	
+	$req_source = $pdo->prepare("SELECT source FROM `urls` where id=:pid");
+	$req_source->bindParam(':pid', $id, PDO::PARAM_INT);
+	$req_source->execute();
+	$req_source->setFetchMode(PDO::FETCH_OBJ);
+    
+		foreach($req_source as $ligne) {
+			$res = $ligne->source;
+		}
+		return $res;
+  }
+  
+    /**
+  * Methode qui donne l'url courte a partir de l'id
+  */
+  public static function getCourteById($id) {
+	global $pdo;
+	
+	$res = "";
+	
+	$req_courte = $pdo->prepare("SELECT courte FROM `urls` where id=:pid");
+	$req_courte->bindParam(':pid', $id, PDO::PARAM_INT);
+	$req_courte->execute();
+	$req_courte->setFetchMode(PDO::FETCH_OBJ);
+    
+		foreach($req_courte as $ligne) {
+			$res = $ligne->courte;
+		}
+		return $res;
+  }
+  
+  	/**
+	 * Methode qui permet de modifier l'url source
+	 */
+	public static function modifSource($id, $NSource) {
+		global $pdo;
+	
+		$req_modif_source = $pdo->prepare("UPDATE `urls` SET `source`=:NSource WHERE id=:id");
+		$req_modif_source->bindParam(':NSource', $NSource);
+		$req_modif_source->bindParam(':id', $id);
+		$req_modif_source->execute();
+		$req_modif_source->setFetchMode(PDO::FETCH_OBJ);
+	}
+	
+	  	/**
+	 * Methode qui permet de modifier l'url courte
+	 */
+	public static function modifCourte($id, $NCourte) {
+		global $pdo;
+	
+		$req_modif_source = $pdo->prepare("UPDATE `urls` SET `courte`=:NCourte WHERE id=:id");
+		$req_modif_source->bindParam(':NCourte', $NCourte);
+		$req_modif_source->bindParam(':id', $id);
+		$req_modif_source->execute();
+		$req_modif_source->setFetchMode(PDO::FETCH_OBJ);
+	}
 }
 
 ?>

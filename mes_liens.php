@@ -22,15 +22,24 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'url');
         data.addColumn('number', 'utilisation');
-
+		
+		$id_author = Membre::getIdFromPseudo($_SESSION['connex_active']);
+		$tab = Url::getUrlByAuthor($id_author);
+		
+		foreach( $tab as $res) 
+		{
+			data.addRows([$res->source , Utilisation::countByUrl($res->id)]);
+		}
+		
         data.addRows([
-          ['Mushrooms', 3],
+          ['Mushrooms', 5],
           ['Onions', 1],
           ['Olives', 1],
           ['Zucchini', 1],
           ['Pepperoni', 2]
         ]); 
-
+		
+		
         // Set chart options
         var options = {'title':'Utilisation de vos url',
                        'width':400,
@@ -105,6 +114,7 @@ if(!empty($_SESSION['connex_active'])) {
 
   // insertion du camembert Google :
   echo "<div id='chart_div'></div>";
+  
 
 }
 else {

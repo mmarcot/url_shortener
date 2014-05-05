@@ -7,13 +7,10 @@ enteteHTML("Modification");
 // affichage de la barre de connexion :
 if(!empty($_SESSION['connex_active']))
   barreConnexion($_SESSION['connex_active']);
-	
+
 // on récupère les info originales :
-$pseudo = Modification::getPseudoFromId($_GET['id']);
-$nom = Modification::getNomFromId($_GET['id']);
-$prenom = Modification::getPrenomFromId($_GET['id']);
-$email = Modification::getEmailFromId($_GET['id']);
-$profil = Modification::getProfilFromId($_GET['id']);
+$source = Modification::getCibleById($_GET['id']);
+$courte = Modification::getCourteById($_GET['id']);
 
 echo <<<DEB_FORM
 <h2 style='text-align:center;'>Modification</h2>
@@ -25,11 +22,11 @@ echo <<<DEB_FORM
 	</tr>
 	<tr>
 	  <td>URL cible :</td>
-	  <td><input type='text' name='cible_m' value='$pseudo'></td>
+	  <td><input type='text' name='source_m' value='$source'></td>
 	</tr>
 	<tr>
 	  <td>URL courte :</td>
-	  <td><input type='text' name='courte_m' value='$nom'></td>
+	  <td><input type='text' name='courte_m' value='$courte'></td>
 	</tr>
 DEB_FORM;
 
