@@ -37,7 +37,7 @@ else { // sinon pas d'erreurs :
     <table style="margin:auto; background:#EEEEEE; padding:5px;">
     <tr>
       <td>URL :</td>
-      <td><input type="text" name="url_short" value="<?php echo $url_court_final; ?>"></td>
+      <td><?php echo "<a href="."http://"."$url_court_final>$url_court_final</a>"; ?></td>
     </tr>
     </table>
   </form>
