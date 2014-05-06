@@ -132,7 +132,7 @@ class Url  {
     global $pdo;
     
     // si le lien ne contient pas de http :
-    if( !strpos($url_orig, 'http://') ) {
+    if( strpos($url_orig, 'http://') === FALSE ) {
       $url_orig = "http://" . $url_orig;
     }
     
