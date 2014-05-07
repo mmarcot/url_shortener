@@ -224,8 +224,30 @@ class Url  {
     $o = $req->fetchObject();
     
     return ($o->id);
-
   }
+
+
+  /**
+   * Methode qui donne l'id de l'auteur grace à un id d'url
+   */
+  public static function getAuthor($id) {
+    global $pdo;
+    
+    $req = $pdo->prepare("SELECT auteur FROM urls WHERE id=:pid;");
+    $req->bindParam(':pid', $id);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    
+    $res = -1;
+    foreach( $req as $ligne ) {
+      $res = $ligne->auteur;
+      break;
+    } 
+
+    return $res;
+  }
+
+
 
 }
 ?>

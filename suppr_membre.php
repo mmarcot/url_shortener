@@ -1,6 +1,8 @@
 <?php 
 include_once("Membre.php");
 
-Membre::supprimerMembre($_GET['id']);
+if( Membre::estAdmin($_SESSION['connex_active']) )
+	Membre::supprimerMembre($_GET['id']);
+
 header("Location: administration.php");
 ?>
