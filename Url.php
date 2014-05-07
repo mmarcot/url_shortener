@@ -77,10 +77,8 @@ class Url  {
   public static function verifierCible($url) {
     $etat = true;
     
-    //TODO modifier incorrect ###########################
-    if( strpos($url, $_SERVER['PHP_SELF']) ) {
+    if( strpos($url, $_SERVER['SERVER_NAME']) ) 
       $etat = false;
-    } 
 
     return $etat;
   }
