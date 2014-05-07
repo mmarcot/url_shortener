@@ -78,7 +78,7 @@ class Url  {
     $etat = true;
     
     //TODO modifier incorrect ###########################
-    if( strpos($url, $_SERVER['PHP_SELF']) === TRUE ) {
+    if( strpos($url, $_SERVER['PHP_SELF']) ) {
       $etat = false;
     } 
 

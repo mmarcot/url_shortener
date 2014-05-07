@@ -9,6 +9,12 @@ include_once("tools.php");
 if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SESSION['connex_active']) == Url::getAuthor($_GET['id']) ) {
 	enteteHTML("Modification");
 
+	// on cherche la page de provenance pour savoir ou rediriger :
+	$page_provenance = $_SERVER['HTTP_REFERER'];
+	if( strpos($page_provenance, "administration.php") )
+		$redir = "administration.php";
+	else $redir = "mes_liens.php";
+
 	// affichage de la barre de connexion :
 	if(!empty($_SESSION['connex_active']))
 	  barreConnexion($_SESSION['connex_active']);
@@ -19,7 +25,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SE
 
 	echo <<<FORM
 	<h2 style='text-align:center;'>Modification</h2>
-	<form action='mes_liens.php' method='post' accept-charset='utf-8'>
+	<form action='${redir}' method='post' accept-charset='utf-8'>
 	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
 		<tr>
 		  <td>ID :</td>
@@ -43,7 +49,7 @@ FORM;
 
 
 	echo"<p style='text-align:center;'>
-		<a href='mes_liens.php'>Retour</a></p>";
+		<a href='${redir}'>Retour</a></p>";
 
 	finHTML();
 }
