@@ -45,7 +45,6 @@ if( !empty($_SESSION['connex_active'] )) {
   echo <<<CONN
   <table style='margin:auto; background:#EEEEEE; padding:8px'>
   <tr><td><a style='text-align:center;' href='mon_compte.php'>Mon compte</a></td></tr>
-  <tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>
   </table>
 CONN;
 

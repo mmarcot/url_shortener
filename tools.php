@@ -31,11 +31,12 @@ JS;
 function barreConnexion($pseudo) {
   echo "<div style=' margin:0; border-bottom:1px solid black; background:#f5f5f5;'>";
   if( Membre::estAdmin($pseudo) ) {
-    echo "<p style='text-align:center; margin:0;' >" . $pseudo . " est connecté (admin)</p>";
+    echo "<p style='text-align:center; margin:0;' >" . $pseudo . " (admin) est connecté";
   }
   else {
-    echo "<p style='text-align:center; margin:0;' >" . $pseudo . " est connecté (membre)</p>";
+    echo "<p style='text-align:center; margin:0;' >" . $pseudo . " est connecté ";
   }
+  echo "(<a href='deconnexion.php'>déconnexion</a>)</p>";
   echo "</div>";
 }
 

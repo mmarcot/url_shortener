@@ -22,7 +22,6 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_l')\">Liste liens</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='mon_compte.php'>Mon compte</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
-  echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
   echo "</table>";
 
   // En cas de modification :

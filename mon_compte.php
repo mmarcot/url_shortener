@@ -15,7 +15,6 @@ if( !empty($_SESSION['connex_active']) ) {
   }
   echo "<tr><td><a style='text-align:center;' href='mes_liens.php'>Mes liens</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
-  echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
   echo "</table>";
 }
 else {

@@ -16,7 +16,6 @@ else if( !Url::verifier($_POST['url_orig']) ) {
   header("Location: index.php");
 }
 else { // sinon pas d'erreurs :
-  
 
   $url_court = Url::genererUrlCourt($_POST['url_orig']);
   $url_court_final = $_SERVER['SERVER_NAME'] . substr_replace($_SERVER['PHP_SELF'], "/q.php?u=".$url_court, -8);
@@ -46,10 +45,7 @@ else { // sinon pas d'erreurs :
   <?php
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
-  if( !empty($_SESSION['connex_active'])) {
-    echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
-  }
-  else {
+  if( empty($_SESSION['connex_active'])) {
     echo "<tr><td><a style='text-align:center;' href='connexion.php'>Me connecter</a></td></tr>";
     echo "<tr><td><a style='text-align:center;' href='inscription.php'>M'inscrire</a></td></tr>";
   }
