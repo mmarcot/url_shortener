@@ -1,24 +1,23 @@
-<!DOCTYPE html> 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Mes liens</title>
-  </head>
-  <body style='margin:0;'>
-
 <?php
 include_once("tools.php");
 include_once("config.php");
 include_once("Url.php");
 include_once("Membre.php");
+include_once("Modification.php");
 include_once("Utilisation.php");
-enteteHTML("Mes liens");
 
 
 if(!empty($_SESSION['connex_active'])) {
 
-  if(!empty($_SESSION['connex_active']))
-    barreConnexion($_SESSION['connex_active']);
+  echo "<!DOCTYPE html> 
+        <html>
+          <head>
+            <meta charset='utf-8' />
+            <title>Mes liens</title>
+          </head>
+          <body style='margin:0;'>";
+
+  barreConnexion($_SESSION['connex_active']);
 
   echo "<h2 style='text-align:center'>Mes liens</h2>";
 
@@ -27,6 +26,15 @@ if(!empty($_SESSION['connex_active'])) {
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='deconnexion.php'>Me deconnecter</a></td></tr>";
   echo "</table>"; 
+
+    // En cas de modification (formulaire):
+  if( !empty($_POST['id_m']) ) {
+    if(!empty($_POST['source_m'])) 
+        Modification::modifSource($_POST['id_m'], $_POST['source_m']);
+      
+    if(!empty($_POST['courte_m'])) 
+        Modification::modifCourte($_POST['id_m'], $_POST['courte_m']);
+  }
 
   // on récupère l'ID de l'auteur pour
   // enuite ressortir ses liens :
@@ -58,11 +66,9 @@ if(!empty($_SESSION['connex_active'])) {
   	echo "</tr>";
   }
   echo "</table>";
-
+  finHTML();
 }
 else {
   header("Location: index.php");
 }
-
-finHTML();
 ?>

@@ -1,8 +1,9 @@
 <?php
 include_once("Modification.php");
-include_once("tools.php");
 include_once("Membre.php");
 include_once("Url.php");
+include_once("tools.php");
+
 
 // verifier que le lien appartient bien au pseudo connecté ou est admin :
 if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SESSION['connex_active']) == Url::getAuthor($_GET['id']) ) {
@@ -18,7 +19,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SE
 
 	echo <<<FORM
 	<h2 style='text-align:center;'>Modification</h2>
-	<form action='administration.php' method='post' accept-charset='utf-8'>
+	<form action='mes_liens.php' method='post' accept-charset='utf-8'>
 	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
 		<tr>
 		  <td>ID :</td>
@@ -42,7 +43,7 @@ FORM;
 
 
 	echo"<p style='text-align:center;'>
-		<a href='administration.php'>Retour</a></p>";
+		<a href='mes_liens.php'>Retour</a></p>";
 
 	finHTML();
 }

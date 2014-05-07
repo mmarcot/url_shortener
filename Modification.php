@@ -12,7 +12,7 @@ class Modification {
 	/**
 	 * Methode qui permet de modifier le pseudo d'un membre dans la BDD
 	 */
-	public static function modifPseudo($id, $NPseudo) {
+	public static function modifPseudo($id, $NPseudo) { //TODO verifier existe deja
 		global $pdo;
 	
 		$req_modif_pseudo = $pdo->prepare("UPDATE `membres` SET `pseudo`=:NPseudo WHERE id=:id");
@@ -55,7 +55,7 @@ class Modification {
 	/**
 	 * Methode qui permet de modifier le mail d'un membre dans la BDD
 	 */
-	public static function modifEmail($id, $NEmail) {
+	public static function modifEmail($id, $NEmail) { //TODO verifier existe deja
 		global $pdo;
 	
 		$req_modif_email = $pdo->prepare("UPDATE `membres` SET `mail`=:NEmail WHERE id=:id");
@@ -83,7 +83,7 @@ class Modification {
 	/**
 	 * Methode qui permet de récupérer le pseudo à partir de l'id
 	 */	
-	public static function getPseudoFromId($id) {
+	public static function getPseudoFromId($id) { //TODO mauvaise place
 		global $pdo;
 		$pseudo = "";
 		$req_recup_pseudo = $pdo->prepare("SELECT pseudo FROM `membres` WHERE id=:rid");
@@ -101,7 +101,7 @@ class Modification {
 	/**
 	 * Methode qui permet de récupérer le nom à partir de l'id
 	 */
-	public static function getNomFromId($id) {
+	public static function getNomFromId($id) { //TODO mauvaise place
 		global $pdo;
 		$nom = "";
 		$req_recup_nom = $pdo->prepare("SELECT nom FROM `membres` WHERE id=:rid");
@@ -119,7 +119,7 @@ class Modification {
 	/**
 	 * Methode qui permet de récupérer le prénom à partir de l'id
 	 */
-	public static function getPrenomFromId($id) {
+	public static function getPrenomFromId($id) { //TODO mauvaise place
 		global $pdo;
 		$prenom = "";
 		$req_recup_prenom = $pdo->prepare("SELECT prenom FROM `membres` WHERE id=:rid");
@@ -138,7 +138,7 @@ class Modification {
 	/**
 	 * Methode qui permet de récupérer le mail à partir de l'id
 	 */
-	public static function getEmailFromId($id) {
+	public static function getEmailFromId($id) { //TODO mauvaise place
 		global $pdo;
 		$mail = "";
 		$req_recup_mail = $pdo->prepare("SELECT mail FROM `membres` WHERE id=:rid");
@@ -156,7 +156,7 @@ class Modification {
 	/**
 	 * Methode qui permet de récupérer le profil à partir de l'id
 	 */
-	public static function getProfilFromId($id) {
+	public static function getProfilFromId($id) { //TODO mauvaise place
 		global $pdo;
 		$profil = "";
 		$req_recup_profil = $pdo->prepare("SELECT profil FROM `membres` WHERE id=:rid");
@@ -177,7 +177,7 @@ class Modification {
   /**
   * Methode qui donne l'url source a partir de l'id
   */
-  public static function getCibleById($id) {
+  public static function getCibleById($id) { //TODO mauvaise place
 	global $pdo;
 	
 	$res = "";
@@ -193,10 +193,10 @@ class Modification {
 		return $res;
   }
   
-    /**
+  /**
   * Methode qui donne l'url courte a partir de l'id
   */
-  public static function getCourteById($id) {
+  public static function getCourteById($id) { //TODO mauvaise place
 	global $pdo;
 	
 	$res = "";
@@ -215,7 +215,7 @@ class Modification {
   	/**
 	 * Methode qui permet de modifier l'url source
 	 */
-	public static function modifSource($id, $NSource) {
+	public static function modifSource($id, $NSource) { 
 		global $pdo;
 	
 		$req_modif_source = $pdo->prepare("UPDATE `urls` SET `source`=:NSource WHERE id=:id");
@@ -228,7 +228,7 @@ class Modification {
 	  	/**
 	 * Methode qui permet de modifier l'url courte
 	 */
-	public static function modifCourte($id, $NCourte) {
+	public static function modifCourte($id, $NCourte) { //TODO verifier si l'url courte n'existe pas deja
 		global $pdo;
 	
 		$req_modif_source = $pdo->prepare("UPDATE `urls` SET `courte`=:NCourte WHERE id=:id");

@@ -69,27 +69,6 @@ class Url  {
   }
 
 
-  /**
-   * Methode qui verifie si l'url original existe deja dans la BDD
-   */
-  public static function verifierExisteDejaOrig($url_orig) { //TODO inutilisé
-    global $pdo;
-
-    $url_court = "";
-    
-    $req = $pdo->prepare("SELECT source, courte FROM urls WHERE source=:sou;");
-    $req->bindParam(":sou", $url_orig);
-    $req->execute();
-    $req->setFetchMode(PDO::FETCH_OBJ);
-    foreach( $req as $ligne ) {
-      // si la requete remonte 1 ligne ou plus
-      // on met c'est que ca existe déja dans la base :
-      $url_court = $ligne->courte;
-    } 
-
-    return $url_court;
-  }
-
 
   /**
    * Methode qui verifier si l'url cible est valide càd qu'il
@@ -99,7 +78,7 @@ class Url  {
     $etat = true;
     
     //TODO modifier incorrect ###########################
-    if( strpos($url, $_SERVER['PHP_SELF'])) {
+    if( strpos($url, $_SERVER['PHP_SELF']) === TRUE ) {
       $etat = false;
     } 
 
