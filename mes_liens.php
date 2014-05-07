@@ -3,53 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>Mes liens</title>
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'url');
-        data.addColumn('number', 'utilisation');
-		
-		$id_author = Membre::getIdFromPseudo($_SESSION['connex_active']);
-		$tab = Url::getUrlByAuthor($id_author);
-		
-		foreach( $tab as $res) 
-		{
-			data.addRows([$res->source , Utilisation::countByUrl($res->id)]);
-		}
-		
-        data.addRows([
-          ['Mushrooms', 5],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]); 
-		
-		
-        // Set chart options
-        var options = {'title':'Utilisation de vos url',
-                       'width':400,
-                       'height':300};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
   </head>
   <body style='margin:0;'>
 
@@ -81,7 +34,7 @@ if(!empty($_SESSION['connex_active'])) {
   $tab = Url::getUrlByAuthor($id_author);
    
   // affichage du tableau de mes liens :
-  echo "<table border='5' style='margin:auto'>
+  echo "<table border='1' style='margin:auto'>
     <tr>
       <th>id</th>
       <th>source</th>
@@ -90,31 +43,21 @@ if(!empty($_SESSION['connex_active'])) {
       <th>creation</th>
       <th>auteur</th>
       <th>suppr</th>
+      <th>modif</th>
     </tr>";
-  foreach( $tab as $res) {
+  foreach( $tab as $ligne) {
     echo "<tr>";
-      echo "<td>$res->id</td>";
-      echo "<td>$res->source</td>";
-      echo "<td>$res->courte</td>";
-
-      echo "<td>";
-      echo Utilisation::countByUrl($res->id);
-      echo "</td>";
-
-      echo "<td>$res->creation</td>";
-
-      echo "<td>";
-      echo Membre::getPseudoFromId($res->auteur);
-      echo "</td>";
-  	
-    	echo "<td><a href='suppr_liens.php?id=" . $res->id . "'>supprimer</a>";
+      echo "<td>$ligne->id</td>";
+      echo "<td>$ligne->source</td>";
+      echo "<td>$ligne->courte</td>";
+      echo "<td>" . Utilisation::countByUrl($ligne->id) . "</td>";
+      echo "<td>" . $ligne->creation . "</td>";
+      echo "<td>" . Membre::getPseudoFromId($ligne->auteur) . "</td>";
+    	echo "<td><a href='suppr_liens.php?id=" . $ligne->id . "'>supprimer</a>";
+      echo "<td><a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>";
   	echo "</tr>";
   }
   echo "</table>";
-
-  // insertion du camembert Google :
-  echo "<div id='chart_div'></div>";
-  
 
 }
 else {
