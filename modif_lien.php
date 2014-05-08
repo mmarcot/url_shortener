@@ -20,8 +20,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SE
 	  barreConnexion($_SESSION['connex_active']);
 
 	// on récupère les info originales :
-	$source = Modification::getCibleById($_GET['id']);
-	$courte = Modification::getCourteById($_GET['id']);
+	$source = Url::getCibleById($_GET['id']);
+	$courte = Url::getCourteById($_GET['id']);
 
 	echo <<<FORM
 	<h2 style='text-align:center;'>Modification</h2>

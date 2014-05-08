@@ -159,6 +159,78 @@ class Membre {
     }
     return $pseudo;
   }
+
+  /**
+   * Methode qui permet de récupérer le nom à partir de l'id
+   */
+  public static function getNomFromId($id) { //TODO mauvaise place
+    global $pdo;
+    $nom = "";
+    $req_recup_nom = $pdo->prepare("SELECT nom FROM `membres` WHERE id=:rid");
+    $req_recup_nom->bindParam(':rid', $id, PDO::PARAM_INT);
+    $req_recup_nom->execute();
+    $req_recup_nom->setFetchMode(PDO::FETCH_OBJ);
+    
+    foreach($req_recup_nom as $ligne) {
+      $nom = $ligne->nom;
+    }
+    return $nom;
+  }
+
+
+  /**
+   * Methode qui permet de récupérer le prénom à partir de l'id
+   */
+  public static function getPrenomFromId($id) { //TODO mauvaise place
+    global $pdo;
+    $prenom = "";
+    $req_recup_prenom = $pdo->prepare("SELECT prenom FROM `membres` WHERE id=:rid");
+    $req_recup_prenom->bindParam(':rid', $id, PDO::PARAM_INT);
+    $req_recup_prenom->execute();
+    $req_recup_prenom->setFetchMode(PDO::FETCH_OBJ);
+    
+    foreach($req_recup_prenom as $ligne) {
+      $prenom = $ligne->prenom;
+    }
+    return $prenom;
+  }
+
+
+
+  /**
+   * Methode qui permet de récupérer le mail à partir de l'id
+   */
+  public static function getEmailFromId($id) { //TODO mauvaise place
+    global $pdo;
+    $mail = "";
+    $req_recup_mail = $pdo->prepare("SELECT mail FROM `membres` WHERE id=:rid");
+    $req_recup_mail->bindParam(':rid', $id, PDO::PARAM_INT);
+    $req_recup_mail->execute();
+    $req_recup_mail->setFetchMode(PDO::FETCH_OBJ);
+    
+    foreach($req_recup_mail as $ligne) {
+      $mail = $ligne->mail;
+    }
+    return $mail;
+  }
+
+
+  /**
+   * Methode qui permet de récupérer le profil à partir de l'id
+   */
+  public static function getProfilFromId($id) { //TODO mauvaise place
+    global $pdo;
+    $profil = "";
+    $req_recup_profil = $pdo->prepare("SELECT profil FROM `membres` WHERE id=:rid");
+    $req_recup_profil->bindParam(':rid', $id, PDO::PARAM_INT);
+    $req_recup_profil->execute();
+    $req_recup_profil->setFetchMode(PDO::FETCH_OBJ);
+    
+    foreach($req_recup_profil as $ligne) {
+      $profil = $ligne->profil;
+    }
+    return $profil;
+  }
 }
 
 ?>

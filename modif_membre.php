@@ -1,5 +1,5 @@
 <?php
-include_once("Modification.php");
+include_once("Membre.php");
 include_once("tools.php");
 
 
@@ -11,11 +11,11 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	  barreConnexion($_SESSION['connex_active']);
 		
 	// on récupère les info originales :
-	$pseudo = Modification::getPseudoFromId($_GET['id']);
-	$nom = Modification::getNomFromId($_GET['id']);
-	$prenom = Modification::getPrenomFromId($_GET['id']);
-	$email = Modification::getEmailFromId($_GET['id']);
-	$profil = Modification::getProfilFromId($_GET['id']);
+	$pseudo = Membre::getPseudoFromId($_GET['id']);
+	$nom = Membre::getNomFromId($_GET['id']);
+	$prenom = Membre::getPrenomFromId($_GET['id']);
+	$email = Membre::getEmailFromId($_GET['id']);
+	$profil = Membre::getProfilFromId($_GET['id']);
 
 	echo <<<DEB_FORM
 	<h2 style='text-align:center;'>Modification</h2>

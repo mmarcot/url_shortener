@@ -47,7 +47,6 @@ if( !empty($_SESSION['connex_active'] )) {
   <tr><td><a style='text-align:center;' href='mon_compte.php'>Mon compte</a></td></tr>
   </table>
 CONN;
-
 }
 else { // sinon il n'est pas connecté :
   echo <<<PACO
