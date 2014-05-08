@@ -14,6 +14,10 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   // on inclut la fonction JS toggledisplay() :
   inclureFonctionToggleDisplay();
 
+  // verifie si il n'y a pas de liens sans auteurs
+  // (en case de suppression)
+  Url::verifAuteur();
+
   echo "<h2 style='text-align:center'>Administration</h2>";
 
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";

@@ -9,6 +9,19 @@ include_once("Membre.php");
  * pour la gestion des urls 
  */
 class Url  {
+
+  /**
+   * Methode qui verifie les auteurs de tous les liens et qui les attribuent au
+   * membre "anonyme" si l'auteur n'existe plus (suppression)
+   */
+  public static function verifAuteur() {
+    global $pdo;
+
+    $req = $pdo->prepare("UPDATE `urls` SET `auteur`=:idano WHERE auteur IS NULL;");
+    $req->bindParam(':idano', Membre::getIdFromPseudo("anonyme"));
+    $req->execute();
+  }
+
   /**
    * Methode qui permet de verifier si un URL entré
    * est valide ou non
@@ -34,14 +47,12 @@ class Url  {
     $etat = true;
     
     // si il y a un espace dans l'url :
-    if( strpos($url, ' ')) {
+    if( strpos($url, ' '))
       $etat = false;
-    } 
     
     // si il n'y a pas de point 
-    if( !strpos($url, '.')) {
+    if( !strpos($url, '.')) 
       $etat = false;
-    }
 
     return $etat;
   }
