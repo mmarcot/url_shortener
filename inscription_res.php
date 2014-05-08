@@ -11,23 +11,15 @@ else {
   $msg_erreur = "";
 
   // on verifie que le pseudo n'existe pas deja :
-  $req = $pdo->prepare("SELECT pseudo FROM membres WHERE pseudo=:pseu;");
-  $req->bindParam(":pseu", $_POST['pseudo']);
-  $req->execute();
-  $req->setFetchMode(PDO::FETCH_OBJ);
-  foreach( $req as $ligne ) {
-    if( $ligne->pseudo == $_POST['pseudo'] ) {
-      $msg_erreur .= "Ce pseudo existe déjà<br>";
-      break;
-    }
-  }
+  if( Membre::verifExPseudo($_POST['pseudo']) )
+    $msg_erreur .= "Ce pseudo existe déjà<br>";
 
   // securise les entrées user :
-  $_POST['pseudo'] = strip_tags(trim($_POST['pseudo']));
-  $_POST['pass'] = strip_tags(trim($_POST['pass']));
-  $_POST['nom'] = strip_tags(trim($_POST['nom']));
-  $_POST['prenom'] = strip_tags(trim($_POST['prenom']));
-  $_POST['mail'] = strip_tags(trim($_POST['mail']));
+  $_POST['pseudo'] = strtolower(strip_tags(trim($_POST['pseudo'])));
+  $_POST['pass'] = strtolower(strip_tags(trim($_POST['pass'])));
+  $_POST['nom'] = strtolower(strip_tags(trim($_POST['nom'])));
+  $_POST['prenom'] = strtolower(strip_tags(trim($_POST['prenom'])));
+  $_POST['mail'] = strtolower(strip_tags(trim($_POST['mail'])));
 
 
   // construction du message d'erreur :

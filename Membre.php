@@ -9,6 +9,50 @@ include_once("tools.php");
 class Membre {
 
   /**
+   * Methode qui verifie si le pseudo existe deja dans la BDD ou non 
+   */
+  public static function verifExPseudo($pseudo) {
+    global $pdo;
+    $etat = FALSE;
+
+    $req = $pdo->prepare("SELECT pseudo FROM membres WHERE pseudo=:pseu;");
+    $req->bindParam(":pseu", $pseudo);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    foreach( $req as $ligne ) {
+      if( $ligne->pseudo == $pseudo ) {
+        $etat = TRUE;
+        break;
+      }
+    }
+
+    return $etat;
+  }
+
+
+  /**
+   * Methode qui verifie si le mail existe deja dans la BDD ou non 
+   */
+  public static function verifExMail($mail) {
+    global $pdo;
+    $etat = FALSE;
+
+    $req = $pdo->prepare("SELECT mail FROM membres WHERE mail=:mai;");
+    $req->bindParam(":mai", $mail);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_OBJ);
+    foreach( $req as $ligne ) {
+      if( $ligne->mail == $mail ) {
+        $etat = TRUE;
+        break;
+      }
+    }
+
+    return $etat;
+  }
+
+
+  /**
    * Methode qui dit si un pseudo est un admin ou non
    */
   public static function estAdmin($pseudo) {
@@ -163,7 +207,7 @@ class Membre {
   /**
    * Methode qui permet de récupérer le nom à partir de l'id
    */
-  public static function getNomFromId($id) { //TODO mauvaise place
+  public static function getNomFromId($id) { 
     global $pdo;
     $nom = "";
     $req_recup_nom = $pdo->prepare("SELECT nom FROM `membres` WHERE id=:rid");
@@ -181,7 +225,7 @@ class Membre {
   /**
    * Methode qui permet de récupérer le prénom à partir de l'id
    */
-  public static function getPrenomFromId($id) { //TODO mauvaise place
+  public static function getPrenomFromId($id) { 
     global $pdo;
     $prenom = "";
     $req_recup_prenom = $pdo->prepare("SELECT prenom FROM `membres` WHERE id=:rid");
@@ -200,7 +244,7 @@ class Membre {
   /**
    * Methode qui permet de récupérer le mail à partir de l'id
    */
-  public static function getEmailFromId($id) { //TODO mauvaise place
+  public static function getEmailFromId($id) { 
     global $pdo;
     $mail = "";
     $req_recup_mail = $pdo->prepare("SELECT mail FROM `membres` WHERE id=:rid");
@@ -218,7 +262,7 @@ class Membre {
   /**
    * Methode qui permet de récupérer le profil à partir de l'id
    */
-  public static function getProfilFromId($id) { //TODO mauvaise place
+  public static function getProfilFromId($id) { 
     global $pdo;
     $profil = "";
     $req_recup_profil = $pdo->prepare("SELECT profil FROM `membres` WHERE id=:rid");

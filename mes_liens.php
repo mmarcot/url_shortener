@@ -28,11 +28,14 @@ if(!empty($_SESSION['connex_active'])) {
 
     // En cas de modification (formulaire):
   if( !empty($_POST['id_m']) ) {
-    if(!empty($_POST['source_m'])) 
-        Modification::modifSource($_POST['id_m'], $_POST['source_m']);
-      
-    if(!empty($_POST['courte_m'])) 
-        Modification::modifCourte($_POST['id_m'], $_POST['courte_m']);
+    if(!empty($_POST['source_m'])) {
+      $_POST['source_m'] = strtolower(strip_tags(trim($_POST['source_m'])));
+      Modification::modifSource($_POST['id_m'], $_POST['source_m']);
+    }
+    if(!empty($_POST['courte_m'])) {
+      $_POST['courte_m'] = strtolower(strip_tags(trim($_POST['courte_m'])));
+      Modification::modifCourte($_POST['id_m'], $_POST['courte_m']);
+    }
   }
 
   // on récupère l'ID de l'auteur pour

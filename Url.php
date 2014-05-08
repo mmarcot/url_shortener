@@ -65,7 +65,7 @@ class Url  {
       $ex_deja = true;
     }
 
-    return $etat;
+    return $ex_deja;
   }
 
 
@@ -229,7 +229,7 @@ class Url  {
   /**
   * Methode qui donne l'url source a partir de l'id
   */
-  public static function getCibleById($id) { //TODO mauvaise place
+  public static function getCibleById($id) { 
     global $pdo;
     
     $res = "";
@@ -248,7 +248,7 @@ class Url  {
   /**
   * Methode qui donne l'url courte a partir de l'id
   */
-  public static function getCourteById($id) { //TODO mauvaise place
+  public static function getCourteById($id) { 
     global $pdo;
     
     $res = "";

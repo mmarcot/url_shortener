@@ -24,28 +24,36 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
   echo "</table>";
 
-  // En cas de modification :
+  // ########### En cas de modification :
   if( !empty($_POST['id_m']) ) {
-    if(!empty($_POST['pseudo_m'])) 
+    if(!empty($_POST['pseudo_m'])) {
+      $_POST['pseudo_m'] = strtolower(strip_tags(trim($_POST['pseudo_m'])));
       Modification::modifPseudo($_POST['id_m'], $_POST['pseudo_m']);
-
-    if(!empty($_POST['nom_m'])) 
+    }
+    if(!empty($_POST['nom_m'])) {
+      $_POST['nom_m'] = strtolower(strip_tags(trim($_POST['nom_m'])));
       Modification::modifNom($_POST['id_m'], $_POST['nom_m']);
-
-    if(!empty($_POST['prenom_m'])) 
+    }
+    if(!empty($_POST['prenom_m'])) {
+      $_POST['prenom_m'] = strtolower(strip_tags(trim($_POST['prenom_m'])));
       Modification::modifPrenom($_POST['id_m'], $_POST['prenom_m']);
-
-    if(!empty($_POST['mail_m']))
+    }
+    if(!empty($_POST['mail_m'])) {
+      $_POST['mail_m'] = strtolower(strip_tags(trim($_POST['mail_m'])));
       Modification::modifEmail($_POST['id_m'], $_POST['mail_m']);
-
-    if(!empty($_POST['profil_m'])) 
+    }
+    if(!empty($_POST['profil_m'])) {
+      $_POST['profil_m'] = strtolower(strip_tags(trim($_POST['profil_m'])));
       Modification::modifProfil($_POST['id_m'], $_POST['profil_m']);
-	  
-  	if(!empty($_POST['source_m'])) 
-        Modification::modifSource($_POST['id_m'], $_POST['source_m']);
-  	  
-  	if(!empty($_POST['courte_m'])) 
-        Modification::modifCourte($_POST['id_m'], $_POST['courte_m']);
+    }
+    if(!empty($_POST['source_m'])) {
+      $_POST['source_m'] = strtolower(strip_tags(trim($_POST['source_m'])));
+      Modification::modifSource($_POST['id_m'], $_POST['source_m']);
+    }
+    if(!empty($_POST['courte_m'])) {
+      $_POST['courte_m'] = strtolower(strip_tags(trim($_POST['courte_m'])));
+      Modification::modifCourte($_POST['id_m'], $_POST['courte_m']);
+    }
   }
 
   // ######### affichage du tableau des membres #########

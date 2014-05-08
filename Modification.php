@@ -1,6 +1,8 @@
 <?php
 include_once("config.php");
 include_once("tools.php");
+include_once("Membre.php");
+include_once("Url.php");
 
 
 /**
@@ -12,14 +14,16 @@ class Modification {
 	/**
 	 * Methode qui permet de modifier le pseudo d'un membre dans la BDD
 	 */
-	public static function modifPseudo($id, $NPseudo) { //TODO verifier existe deja
+	public static function modifPseudo($id, $NPseudo) { 
 		global $pdo;
 	
-		$req_modif_pseudo = $pdo->prepare("UPDATE `membres` SET `pseudo`=:NPseudo WHERE id=:id");
-		$req_modif_pseudo->bindParam(':NPseudo', $NPseudo);
-		$req_modif_pseudo->bindParam(':id', $id);
-		$req_modif_pseudo->execute();
-		$req_modif_pseudo->setFetchMode(PDO::FETCH_OBJ);
+		if( !Membre::verifExPseudo($NPseudo) ) {
+			$req_modif_pseudo = $pdo->prepare("UPDATE `membres` SET `pseudo`=:NPseudo WHERE id=:id");
+			$req_modif_pseudo->bindParam(':NPseudo', $NPseudo);
+			$req_modif_pseudo->bindParam(':id', $id);
+			$req_modif_pseudo->execute();
+			$req_modif_pseudo->setFetchMode(PDO::FETCH_OBJ);
+		}
 	}
 	
 
@@ -55,14 +59,16 @@ class Modification {
 	/**
 	 * Methode qui permet de modifier le mail d'un membre dans la BDD
 	 */
-	public static function modifEmail($id, $NEmail) { //TODO verifier existe deja
+	public static function modifEmail($id, $NEmail) { 
 		global $pdo;
 	
-		$req_modif_email = $pdo->prepare("UPDATE `membres` SET `mail`=:NEmail WHERE id=:id");
-		$req_modif_email->bindParam(':NEmail', $NEmail);
-		$req_modif_email->bindParam(':id', $id);
-		$req_modif_email->execute();
-		$req_modif_email->setFetchMode(PDO::FETCH_OBJ);
+		if( !Membre::verifExMail($NEmail) ) {
+			$req_modif_email = $pdo->prepare("UPDATE `membres` SET `mail`=:NEmail WHERE id=:id");
+			$req_modif_email->bindParam(':NEmail', $NEmail);
+			$req_modif_email->bindParam(':id', $id);
+			$req_modif_email->execute();
+			$req_modif_email->setFetchMode(PDO::FETCH_OBJ);
+		}
 	}
 	
 
@@ -87,7 +93,7 @@ class Modification {
 	  
 
   
-  	/**
+  /**
 	 * Methode qui permet de modifier l'url source
 	 */
 	public static function modifSource($id, $NSource) { 
@@ -100,17 +106,19 @@ class Modification {
 		$req_modif_source->setFetchMode(PDO::FETCH_OBJ);
 	}
 	
-	  	/**
+	/**
 	 * Methode qui permet de modifier l'url courte
 	 */
-	public static function modifCourte($id, $NCourte) { //TODO verifier si l'url courte n'existe pas deja
+	public static function modifCourte($id, $NCourte) { 
 		global $pdo;
 	
-		$req_modif_source = $pdo->prepare("UPDATE `urls` SET `courte`=:NCourte WHERE id=:id");
-		$req_modif_source->bindParam(':NCourte', $NCourte);
-		$req_modif_source->bindParam(':id', $id);
-		$req_modif_source->execute();
-		$req_modif_source->setFetchMode(PDO::FETCH_OBJ);
+		if( !Url::verifierExisteDejaCourt($NCourte) ) {
+			$req_modif_source = $pdo->prepare("UPDATE `urls` SET `courte`=:NCourte WHERE id=:id");
+			$req_modif_source->bindParam(':NCourte', $NCourte);
+			$req_modif_source->bindParam(':id', $id);
+			$req_modif_source->execute();
+			$req_modif_source->setFetchMode(PDO::FETCH_OBJ);
+		}
 	}
 }
 
