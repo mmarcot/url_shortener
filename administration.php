@@ -2,6 +2,7 @@
 include_once("Membre.php");
 include_once("Url.php");
 include_once("Modification.php");
+include_once("Tableau.php");
 
 enteteHTML("Espace admin");
 
@@ -62,7 +63,24 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 
   // ######### affichage du tableau des membres #########
   $tab_membres = Membre::getAll();
-  echo "<table border='1' style='margin: auto; display:none;' id='tab_m'>
+
+  // on crée le tableau HTML et on l'affiche :  
+  $tab_liens = new Tableau(array("ID", "Pseudo", "Nom", "Prenom", "E-mail", "Profil", "Suppr", "Modif"));
+  $id_anonyme = Membre::getIdFromPseudo("anonyme");
+  foreach( $tab_membres as $ligne)  {
+    $suppr_field = "";
+    $modif_field = "";
+
+    if( !Membre::estAdmin($ligne->pseudo) && $ligne->id != $id_anonyme ) {
+      $suppr_field = "<a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
+      $modif_field = "<a href='modif_membre.php?id=" . $ligne->id . "'>modifier</a>";
+    }
+
+    $tab_liens->add_line(array($ligne->id, $ligne->pseudo, $ligne->nom, $ligne->prenom, $ligne->mail, $ligne->profil, $suppr_field, $modif_field));
+  }
+  $tab_liens->afficher();
+
+  /* echo "<table border='1' style='margin: auto; display:none;' id='tab_m'>
         <tr>
           <th>ID</th>
           <th>Pseudo</th>
@@ -105,7 +123,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   	}
     echo "</tr>";
   }
-  echo "</table>";
+  echo "</table>"; */
   
   
   // ######### affichage du tableau des liens #########
