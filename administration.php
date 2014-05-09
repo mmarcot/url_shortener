@@ -15,7 +15,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   inclureFonctionToggleDisplay();
 
   // verifie si il n'y a pas de liens sans auteurs
-  // (en case de suppression)
+  // (en case de suppression) :
   Url::verifAuteur();
 
   echo "<h2 style='text-align:center'>Administration</h2>";

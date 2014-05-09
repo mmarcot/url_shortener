@@ -21,6 +21,7 @@ class Url  {
     $req->bindParam(':idano', Membre::getIdFromPseudo("anonyme"));
     $req->execute();
   }
+  
 
   /**
    * Methode qui permet de verifier si un URL entré
