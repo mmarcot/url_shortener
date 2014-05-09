@@ -5,6 +5,7 @@ include_once("Url.php");
 include_once("Membre.php");
 include_once("Modification.php");
 include_once("Utilisation.php");
+include_once("Tableau.php");
 
 
 if(!empty($_SESSION['connex_active'])) {
@@ -39,35 +40,19 @@ if(!empty($_SESSION['connex_active'])) {
   }
 
   // on récupère l'ID de l'auteur pour
-  // enuite ressortir ses liens :
+  // ensuite ressortir ses liens :
   $id_author = Membre::getIdFromPseudo($_SESSION['connex_active']);
   $tab = Url::getUrlByAuthor($id_author);
-   
-  // affichage du tableau de mes liens :
-  echo "<table border='1' style='margin:auto'>
-    <tr>
-      <th>id</th>
-      <th>source</th>
-      <th>courte</th>
-      <th>utilisation</th>
-      <th>creation</th>
-      <th>auteur</th>
-      <th>suppr</th>
-      <th>modif</th>
-    </tr>";
-  foreach( $tab as $ligne) {
-    echo "<tr>";
-      echo "<td>$ligne->id</td>";
-      echo "<td>$ligne->source</td>";
-      echo "<td>$ligne->courte</td>";
-      echo "<td>" . Utilisation::countByUrl($ligne->id) . "</td>";
-      echo "<td>" . $ligne->creation . "</td>";
-      echo "<td>" . Membre::getPseudoFromId($ligne->auteur) . "</td>";
-    	echo "<td><a href='suppr_liens.php?id=" . $ligne->id . "'>supprimer</a>";
-      echo "<td><a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>";
-  	echo "</tr>";
+
+  // on crée le tableau HTML et on l'affiche :  
+  $tab_liens = new Tableau(array("id", "source", "courte", "utilisation", "creation", "auteur", "suppr", "modif"));
+  foreach( $tab as $ligne)  {
+    $tab_liens->add_line(array($ligne->id, $ligne->source, $ligne->courte, Utilisation::countByUrl($ligne->id), $ligne->creation, 
+        Membre::getPseudoFromId($ligne->auteur), "<a href='suppr_liens.php?id=" . $ligne->id . "'>supprimer</a>", 
+        "<a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>"));
   }
-  echo "</table>";
+  $tab_liens->afficher();
+
   finHTML();
 }
 else {
