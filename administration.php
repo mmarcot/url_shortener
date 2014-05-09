@@ -3,6 +3,7 @@ include_once("Membre.php");
 include_once("Url.php");
 include_once("Modification.php");
 include_once("Tableau.php");
+include_once("Utilisation.php");
 
 enteteHTML("Espace admin");
 
@@ -62,12 +63,11 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   }
 
   // ######### affichage du tableau des membres #########
-  $tab_membres = Membre::getAll();
+  $tab = Membre::getAll();
 
-  // on crée le tableau HTML et on l'affiche :  
-  $tab_liens = new Tableau(array("ID", "Pseudo", "Nom", "Prenom", "E-mail", "Profil", "Suppr", "Modif"));
+  $tab_membres = new Tableau(array("ID", "Pseudo", "Nom", "Prenom", "E-mail", "Profil", "Suppr", "Modif"), "tab_m");
   $id_anonyme = Membre::getIdFromPseudo("anonyme");
-  foreach( $tab_membres as $ligne)  {
+  foreach( $tab as $ligne)  {
     $suppr_field = "";
     $modif_field = "";
 
@@ -76,82 +76,22 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
       $modif_field = "<a href='modif_membre.php?id=" . $ligne->id . "'>modifier</a>";
     }
 
-    $tab_liens->add_line(array($ligne->id, $ligne->pseudo, $ligne->nom, $ligne->prenom, $ligne->mail, $ligne->profil, $suppr_field, $modif_field));
+    $tab_membres->add_line(array($ligne->id, $ligne->pseudo, $ligne->nom, $ligne->prenom, $ligne->mail, $ligne->profil, $suppr_field, $modif_field));
   }
-  $tab_liens->afficher();
-
-  /* echo "<table border='1' style='margin: auto; display:none;' id='tab_m'>
-        <tr>
-          <th>ID</th>
-          <th>Pseudo</th>
-          <th>Nom</th>
-          <th>Prenom</th>
-          <th>E-mail</th>
-          <th>Profil</th>
-          <th>Suppr</th>
-          <th>Modif</th>
-        </tr>";
-
-  foreach( $tab_membres as $ligne) {
-    echo "<tr>
-            <td>$ligne->id</td>
-            <td>$ligne->pseudo</td>
-            <td>$ligne->nom</td>
-            <td>$ligne->prenom</td>
-            <td>$ligne->mail</td>
-            <td>$ligne->profil</td>";
-    
-  	// Recuperation de l'id du membre anonyme :
-  	$id_anonyme = Membre::getIdFromPseudo("anonyme");
-  	
-  	// Recuperation des administrateurs :
-  	$admin = Membre::estAdmin($ligne->pseudo);
-  	
-  	// Affichage du lien suppression pour tous les membres
-  	// sauf pour le membre anonyme :
-  	if($ligne->id == $id_anonyme) { // si anonyme
-  		echo "<td><p></p>";
-  		echo "<td><p></p>";
-  	}
-  	else if($admin == true) { // si admin
-  		echo "<td><p></p>";
-  		echo "<td><a href='modif_membre.php?id=" . $ligne->id . "'>modifier</a>";
-  	}
-  	else if($admin == false) { //si membre
-  		echo "<td><a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
-  		echo "<td><a href='modif_membre.php?id=" . $ligne->id . "'>modifier</a>";
-  	}
-    echo "</tr>";
-  }
-  echo "</table>"; */
+  $tab_membres->afficher();
   
   
   // ######### affichage du tableau des liens #########
-  $tab_liens = Url::getAll();
-  echo "<div style='display:none;' id='tab_l'>"; 
-  echo "<table border='1' style='margin: auto;'>
-        <tr>
-          <th>ID</th>
-          <th>URL cible</th>
-          <th>URL courte</th>
-          <th>Créée le</th>
-          <th>Auteur</th>
-          <th>Suppr</th>
-          <th>Modif</th>
-        </tr>";
-  foreach( $tab_liens as $ligne) {
-    echo "<tr>
-            <td>$ligne->id</td>
-            <td>$ligne->source</td>
-            <td>$ligne->courte</td>
-            <td>$ligne->creation</td>";
-            
-      echo "<td>" . Membre::getPseudoFromId($ligne->auteur) . "</td>";
-  		echo "<td><a href='suppr_liens2.php?id=" .$ligne->id . "'>supprimer</a>";
-  		echo "<td><a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>";
-    echo "</tr>";
+  $tab = Url::getAll();
+
+  $tab_liens = new Tableau(array("id", "source", "courte", "utilisation", "creation", "auteur", "suppr", "modif"), "tab_l");
+  foreach( $tab as $ligne)  {
+    $tab_liens->add_line(array($ligne->id, $ligne->source, $ligne->courte, Utilisation::countByUrl($ligne->id), $ligne->creation, 
+        Membre::getPseudoFromId($ligne->auteur), "<a href='suppr_liens.php?id=" . $ligne->id . "'>supprimer</a>", 
+        "<a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>"));
   }
-  echo "</table></div>";
+  $tab_liens->afficher();
+
 }
 else {
   header("Location: index.php");

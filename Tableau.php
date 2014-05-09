@@ -7,12 +7,16 @@ class Tableau {
 	var $header;
 	var $content; // tableau de tableau
 	var $nb_col;
+	var $etiquette; // id HTML
 
 	/**
 	 * Constructeur d'un tableau HTML
 	 * @param tab_headers tableau contenant l'ensemble de headers
 	 */
-	function Tableau($tab_headers) {
+	function Tableau($tab_headers, $p_etiquette = "") {
+		if( !empty($p_etiquette) )
+			$this->etiquette = "id='" . $p_etiquette . "'";
+
 		$this->nb_col = 0;
 		foreach($tab_headers as $col) {
 			$this->header[$this->nb_col] = $col;
@@ -36,7 +40,7 @@ class Tableau {
 	 * Methode qui permet d'afficher le tableau
 	 */
 	function afficher() {
-		echo "<table border='1' style='margin:auto'>";
+		echo "<table border='1' style='margin:auto' " . $this->etiquette . ">";
 		echo "<tr>";
 		foreach ($this->header as $key => $value) 
 			echo "<th>" . $value . "</th>";

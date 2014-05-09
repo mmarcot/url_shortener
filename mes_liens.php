@@ -27,7 +27,7 @@ if(!empty($_SESSION['connex_active'])) {
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
   echo "</table>"; 
 
-    // En cas de modification (formulaire):
+  // En cas de modification (formulaire):
   if( !empty($_POST['id_m']) ) {
     if(!empty($_POST['source_m'])) {
       $_POST['source_m'] = strtolower(strip_tags(trim($_POST['source_m'])));
