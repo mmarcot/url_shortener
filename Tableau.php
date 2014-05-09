@@ -5,11 +5,12 @@
  */
 class Tableau {
 	var $header;
-	var $content;
+	var $content; // tableau de tableau
 	var $nb_col;
 
 	/**
 	 * Constructeur d'un tableau HTML
+	 * @param tab_headers tableau contenant l'ensemble de headers
 	 */
 	function Tableau($tab_headers) {
 		$this->nb_col = 0;
@@ -22,6 +23,7 @@ class Tableau {
 
 	/**
 	 * Methode qui permet d'ajouter une ligne au tableau
+	 * @param tab_line Tableau contenant le contenu d'une ligne
 	 */
 	function add_line($tab_line) {
 		if( count($tab_line) == $this->nb_col ) {
