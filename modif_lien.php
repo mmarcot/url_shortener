@@ -29,7 +29,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SE
 	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
 		<tr>
 		  <td>ID :</td>
-		  <td><input type='text' name='id_m' value='${_GET['id']}'></td>
+		  <td>${_GET['id']}</td>
 		</tr>
 		<tr>
 		  <td>URL cible :</td>
