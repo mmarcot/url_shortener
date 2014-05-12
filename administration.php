@@ -68,15 +68,11 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   $tab_membres = new Tableau(array("ID", "Pseudo", "Nom", "Prenom", "E-mail", "Profil", "Suppr", "Modif"), "tab_m");
   $id_anonyme = Membre::getIdFromPseudo("anonyme");
   foreach( $tab as $ligne)  {
-    $suppr_field = "";
-    $modif_field = "";
-
-    if( !Membre::estAdmin($ligne->pseudo) && $ligne->id != $id_anonyme ) {
+    if( $ligne->id != $id_anonyme ) {
       $suppr_field = "<a href='suppr_membre.php?id=" . $ligne->id . "'>supprimer</a>";
       $modif_field = "<a href='modif_membre.php?id=" . $ligne->id . "'>modifier</a>";
+      $tab_membres->add_line(array($ligne->id, $ligne->pseudo, $ligne->nom, $ligne->prenom, $ligne->mail, $ligne->profil, $suppr_field, $modif_field));
     }
-
-    $tab_membres->add_line(array($ligne->id, $ligne->pseudo, $ligne->nom, $ligne->prenom, $ligne->mail, $ligne->profil, $suppr_field, $modif_field));
   }
   $tab_membres->afficher();
   
