@@ -11,9 +11,9 @@ if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SE
 
 	// on cherche la page de provenance pour savoir ou rediriger :
 	$page_provenance = $_SERVER['HTTP_REFERER'];
+	$redir = "mes_liens.php";
 	if( strpos($page_provenance, "administration.php") )
 		$redir = "administration.php";
-	else $redir = "mes_liens.php";
 
 	// affichage de la barre de connexion :
 	if(!empty($_SESSION['connex_active']))
@@ -25,8 +25,9 @@ if( Membre::estAdmin($_SESSION['connex_active']) || Membre::getIdFromPseudo($_SE
 
 	echo <<<FORM
 	<h2 style='text-align:center;'>Modification</h2>
-	<form action='${redir}' method='post' accept-charset='utf-8'>
+	<form action='${redir}' method='POST' accept-charset='utf-8'>
 	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
+	  <input style='display:none' type='text' name='id_m' value='${_GET['id']}'>
 		<tr>
 		  <td>ID :</td>
 		  <td>${_GET['id']}</td>

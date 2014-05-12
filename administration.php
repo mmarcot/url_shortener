@@ -87,7 +87,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   $tab_liens = new Tableau(array("id", "source", "courte", "utilisation", "creation", "auteur", "suppr", "modif"), "tab_l");
   foreach( $tab as $ligne)  {
     $tab_liens->add_line(array($ligne->id, $ligne->source, $ligne->courte, Utilisation::countByUrl($ligne->id), $ligne->creation, 
-        Membre::getPseudoFromId($ligne->auteur), "<a href='suppr_liens.php?id=" . $ligne->id . "'>supprimer</a>", 
+        Membre::getPseudoFromId($ligne->auteur), "<a href='suppr_liens2.php?id=" . $ligne->id . "'>supprimer</a>", 
         "<a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>"));
   }
   $tab_liens->afficher();

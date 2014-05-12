@@ -21,6 +21,7 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 	<h2 style='text-align:center;'>Modification</h2>
 	<form action='administration.php' method='post' accept-charset='utf-8'>
 	  <table style='margin:auto; background:#EEEEEE; padding:5px;'>
+	  <input style='display:none' type='text' name='id_m' value='${_GET['id']}'>
 		<tr>
 		  <td>ID :</td>
 		  <td>${_GET['id']}</td>
