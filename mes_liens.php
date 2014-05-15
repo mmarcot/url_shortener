@@ -37,21 +37,19 @@ if(!empty($_SESSION['connex_active'])) {
           data.addColumn('number', 'Utilisation');
           data.addRows([
 
-<?php        
+<?php  
 $id_pseudo = Membre::getIdFromPseudo($_SESSION['connex_active']);
 $liste_url_aut = Url::getUrlByAuthor($id_pseudo);
 
-foreach ($liste_url_aut as $key => $value) {
-  echo "['" . Url::getCibleById($value) . "'," . Utilisation::countByUrl($value) . "],";
+foreach ($liste_url_aut as $value) {
+  echo "['" . Url::getCibleById($value->id) . "'," . Utilisation::countByUrl($value->id) . "],";
 }
-//echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "],";
-echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "]";
 echo "]);";
 ?>
           // Set chart options
           var options = {'title':'Nombre d\'utilisation(s) par lien',
-                         'width':400,
-                         'height':300};
+                         'width':500,
+                         'height':500};
 
           // Instantiate and draw our chart, passing in some options.
           var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -59,7 +57,7 @@ echo "]);";
         }
       </script>
     </head>
-    <body style='margin:0;'>";
+    <body style='margin:0;'>
 
 <?php
   barreConnexion($_SESSION['connex_active']);

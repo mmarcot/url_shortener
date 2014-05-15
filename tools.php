@@ -47,7 +47,7 @@ function barreConnexion($pseudo) {
  */
 function enteteHTML($titre)
 {
-  echo "
+  echo <<<YOP
 <!DOCTYPE html> 
 <html>
   <head>
@@ -56,7 +56,8 @@ function enteteHTML($titre)
       $titre
     </title>
   </head>
-  <body style='margin:0;'>";
+  <body style='margin:0;'>
+YOP;
 }
 
 
