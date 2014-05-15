@@ -16,9 +16,10 @@ class Url  {
    */
   public static function verifAuteur() {
     global $pdo;
+    $id_ano = Membre::getIdFromPseudo("anonyme");
 
     $req = $pdo->prepare("UPDATE `urls` SET `auteur`=:idano WHERE auteur IS NULL;");
-    $req->bindParam(':idano', Membre::getIdFromPseudo("anonyme"));
+    $req->bindParam(':idano', $id_ano);
     $req->execute();
   }
   

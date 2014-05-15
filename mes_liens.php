@@ -15,6 +15,49 @@ if(!empty($_SESSION['connex_active'])) {
           <head>
             <meta charset='utf-8' />
             <title>Mes liens</title>
+      <!--Load the AJAX API-->
+      <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+      <script type='text/javascript'>
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Lien');
+        data.addColumn('number', 'Utilisation');
+        data.addRows([";
+  //getUrlByAuthor
+  echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "],";
+  echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "]";
+
+
+         /* ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2] */
+
+  echo "]);
+        // Set chart options
+        var options = {'title':'Nombre d'utilisation(s) par lien',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
           </head>
           <body style='margin:0;'>";
 
@@ -52,6 +95,9 @@ if(!empty($_SESSION['connex_active'])) {
         "<a href='modif_lien.php?id=" . $ligne->id . "'>modifier</a>"));
   }
   $tab_liens->afficher();
+
+  // affichage du graphic
+  echo "<div id='chart_div'></div>";
 
   finHTML();
 }
