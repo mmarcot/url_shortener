@@ -9,58 +9,59 @@ include_once("Tableau.php");
 
 
 if(!empty($_SESSION['connex_active'])) {
+?>
 
-  echo "<!DOCTYPE html> 
-        <html>
-          <head>
-            <meta charset='utf-8' />
-            <title>Mes liens</title>
-      <!--Load the AJAX API-->
-      <script type='text/javascript' src='https://www.google.com/jsapi'></script>
-      <script type='text/javascript'>
+<!DOCTYPE html> 
+  <html>
+    <head>
+      <meta charset='utf-8' />
+      <title>Mes liens</title>
+        <!--Load the AJAX API-->
+        <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+        <script type='text/javascript'>
 
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', {'packages':['corechart']});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Lien');
-        data.addColumn('number', 'Utilisation');
-        data.addRows([";
-  //getUrlByAuthor
-  echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "],";
-  echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "]";
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Lien');
+          data.addColumn('number', 'Utilisation');
+          data.addRows([
 
+<?php        
+$id_pseudo = Membre::getIdFromPseudo($_SESSION['connex_active']);
+$liste_url_aut = Url::getUrlByAuthor($id_pseudo);
 
-         /* ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2] */
+foreach ($liste_url_aut as $key => $value) {
+  echo "['" . Url::getCibleById($value) . "'," . Utilisation::countByUrl($value) . "],";
+}
+//echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "],";
+echo "['" . Url::getCibleById(34) . "'," . Utilisation::countByUrl(34) . "]";
+echo "]);";
+?>
+          // Set chart options
+          var options = {'title':'Nombre d\'utilisation(s) par lien',
+                         'width':400,
+                         'height':300};
 
-  echo "]);
-        // Set chart options
-        var options = {'title':'Nombre d'utilisation(s) par lien',
-                       'width':400,
-                       'height':300};
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
+      </script>
+    </head>
+    <body style='margin:0;'>";
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-
-          </head>
-          <body style='margin:0;'>";
-
+<?php
   barreConnexion($_SESSION['connex_active']);
 
   echo "<h2 style='text-align:center'>Mes liens</h2>";
@@ -96,7 +97,7 @@ if(!empty($_SESSION['connex_active'])) {
   }
   $tab_liens->afficher();
 
-  // affichage du graphic
+  // affichage du graphique
   echo "<div id='chart_div'></div>";
 
   finHTML();
