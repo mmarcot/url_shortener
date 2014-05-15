@@ -12,7 +12,7 @@ if(!empty($_SESSION['connex_active'])) {
 ?>
 
 <!DOCTYPE html> 
-  <html>
+  <html style='background-color: #F5FAFF;'>
     <head>
       <meta charset='utf-8' />
       <title>Mes liens</title>
@@ -47,7 +47,8 @@ foreach ($liste_url_aut as $value) {
 echo "]);";
 ?>
           // Set chart options
-          var options = {'title':'Utilisation par lien'};
+          var options = {'title':'Utilisation par lien', 
+                         'backgroundColor':'#F5FAFF'};
 
           // Instantiate and draw our chart, passing in some options.
           var chart = new google.visualization.PieChart(document.getElementById('chart_div'));

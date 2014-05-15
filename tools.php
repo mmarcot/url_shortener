@@ -49,7 +49,7 @@ function enteteHTML($titre)
 {
   echo <<<YOP
 <!DOCTYPE html> 
-<html>
+<html style='background-color: #F5FAFF;'>
   <head>
     <meta charset='utf-8' />
     <title>
