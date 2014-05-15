@@ -47,9 +47,7 @@ foreach ($liste_url_aut as $value) {
 echo "]);";
 ?>
           // Set chart options
-          var options = {'title':'Nombre d\'utilisation(s) par lien',
-                         'width':500,
-                         'height':500};
+          var options = {'title':'Utilisation par lien'};
 
           // Instantiate and draw our chart, passing in some options.
           var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -96,7 +94,7 @@ echo "]);";
   $tab_liens->afficher();
 
   // affichage du graphique
-  echo "<div id='chart_div'></div>";
+  echo "<div id='chart_div' style='width:700px; height:300px; margin:auto;'></div>";
 
   finHTML();
 }
