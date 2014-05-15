@@ -12,6 +12,7 @@ class Tableau {
 	/**
 	 * Constructeur d'un tableau HTML
 	 * @param tab_headers tableau contenant l'ensemble de headers
+	 * @param p_etiquette Etiquette HTML
 	 */
 	function Tableau($tab_headers, $p_etiquette = "") {
 		if( !empty($p_etiquette) )

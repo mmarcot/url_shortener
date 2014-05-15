@@ -24,8 +24,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
 
   echo "<table style='margin:auto; background:#EEEEEE; padding:8px'>";
 
-  echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_m')\">Liste membres</a></td></tr>";
-  echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_l')\">Liste liens</a></td></tr>";
+  //echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_m')\">Liste membres</a></td></tr>";
+  //echo "<tr><td><a style='text-align:center;' href='#' onclick=\"toggleDisplay('tab_l')\">Liste liens</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='mon_compte.php'>Mon compte</a></td></tr>";
   echo "<tr><td><a style='text-align:center;' href='index.php'>Retour accueil</a></td></tr>";
   echo "</table>";
@@ -63,8 +63,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   }
 
   // ######### affichage du tableau des membres #########
+  echo "<h3 style='text-align:center'>Liste des membres</h3>";
   $tab = Membre::getAll();
-
   $tab_membres = new Tableau(array("ID", "Pseudo", "Nom", "Prenom", "E-mail", "Profil", "Suppr", "Modif"), "tab_m");
   $id_anonyme = Membre::getIdFromPseudo("anonyme");
   foreach( $tab as $ligne)  {
@@ -78,8 +78,8 @@ if( Membre::estAdmin($_SESSION['connex_active']) ) {
   
   
   // ######### affichage du tableau des liens #########
+  echo "<br><h3 style='text-align:center'>Liste des liens</h3>";
   $tab = Url::getAll();
-
   $tab_liens = new Tableau(array("id", "source", "courte", "utilisation", "creation", "auteur", "suppr", "modif"), "tab_l");
   foreach( $tab as $ligne)  {
     $tab_liens->add_line(array($ligne->id, $ligne->source, $ligne->courte, Utilisation::countByUrl($ligne->id), $ligne->creation, 
